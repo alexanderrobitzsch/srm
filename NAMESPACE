@@ -1,0 +1,51 @@
+
+
+useDynLib(srm)
+
+
+
+
+######################################
+########### IMPORTS ##################
+
+
+importFrom(Rcpp, evalCpp)
+importFrom(stats, as.formula)
+importFrom(stats, ave)
+importFrom(stats, rnorm)
+importFrom(stats, pnorm)
+importFrom(utils, packageDescription)
+importFrom(utils, sessionInfo)
+
+
+
+
+#***************************************************
+#************** Imports ****************************
+
+
+
+
+
+#***************************************************
+#************** Suggests ***************************
+
+
+
+
+######################################
+########### EXPORTS ##################
+
+export(srm)
+export(srm_arbsrm)
+    
+    
+
+#########################################
+########### S3 METHODS ##################
+
+S3method(coef, srm)
+S3method(coef, srm_arbsrm)
+S3method(summary, srm)
+S3method(summary, srm_arbsrm)
+S3method(vcov, srm)

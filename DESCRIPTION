@@ -1,0 +1,29 @@
+Package: srm
+Type: Package
+Title: Structural Equation Modeling for the Social Relations Model
+Version: 0.1-139
+Date: 2019-05-23 00:05:40
+Author: Steffen Nestler [aut], Alexander Robitzsch [aut, cre], 
+        Oliver Luedtke [aut]
+Maintainer: Alexander Robitzsch <robitzsch@ipn.uni-kiel.de>
+Description:
+    Provides functionality for structural equation modeling for
+    the social relations model (Warner, Kenny, & Soto, 1979,
+    <doi:10.1037/0022-3514.37.10.1742>). Maximum likelihood
+    estimation (Gill & Swartz, 2001, <doi:10.2307/3316080>;
+    Nestler, 2018, <doi:10.3102/1076998617741106>) and 
+    least squares estimation is supported (Bond & Malloy, 2018,
+    <doi:10.1016/B978-0-12-811967-9.00014-X>).
+Depends:
+    R (>= 3.1)
+Imports:
+    Rcpp, stats, utils
+Enhances:
+    amen, TripleR
+LinkingTo: 
+    Rcpp, RcppArmadillo
+License: GPL (>= 2)
+URL: 
+    https://github.com/alexanderrobitzsch/srm,
+    https://sites.google.com/site/alexanderrobitzsch2/software
+RoxygenNote: 6.1.1
