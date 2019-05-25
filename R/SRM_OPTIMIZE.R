@@ -16,7 +16,6 @@ SRM_OPTIMIZE <- function(x, parm.table, parm_list, symm_matrices, npar,
     grad <- rep(0, npar)
     hessian <- matrix(0, nrow=npar, ncol=npar)    
     G <- length(data_list)
-
     for (gg in seq_len(G) ){
         data_list_gg <- data_list[[gg]]    
         calculate_gg <- (! shortcut ) | data_list_gg$calculate_gg

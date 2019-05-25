@@ -1,5 +1,5 @@
 ## File Name: SRM_PARTABLE_MAKE.R
-## File Version: 0.21
+## File Version: 0.22
 
 SRM_PARTABLE_MAKE <- function(model.syntax = '',
                               ngroups = 1L, 
@@ -27,8 +27,8 @@ SRM_PARTABLE_MAKE <- function(model.syntax = '',
     # fixed: 0   0   0
     # start: 0   0   0
 
-    pers.list <- SRM_PARSER_LIST (model.p, ngroups = ngroups, name="Person")
-    dyad.list <- SRM_PARSER_LIST (model.d, ngroups = ngroups, name="Dyad")
+    pers.list <- SRM_PARSER_LIST(model.p, ngroups = ngroups, name="Person")
+    dyad.list <- SRM_PARSER_LIST(model.d, ngroups = ngroups, name="Dyad")
     dyad.list <- SRM_PARSER_LIST_ADD_DYAD_FACTORS (dyad.list)
 
     # We use pers.list to construct a pers.list that

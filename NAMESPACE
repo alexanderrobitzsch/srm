@@ -46,6 +46,7 @@ export(srm_arbsrm)
 
 S3method(coef, srm)
 S3method(coef, srm_arbsrm)
+S3method(logLik, srm)
 S3method(summary, srm)
 S3method(summary, srm_arbsrm)
 S3method(vcov, srm)

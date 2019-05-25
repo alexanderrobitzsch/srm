@@ -1,5 +1,5 @@
 ## File Name: SRM_MAKE_DATA_LIST.R
-## File Version: 0.226
+## File Version: 0.233
 
 SRM_MAKE_DATA_LIST <- function( srm_data = NULL,
                                 person_names = NULL,
@@ -45,7 +45,7 @@ z0 <- Sys.time()
      ##-- we iterate through the groups
      for (ng in 1:ngroups) {
 
-         #- a temporary data-frame
+         #- a temporary data frame
          tmp_data = srm_data[srm_data[,group.var] == groups[ng],] 
          
          #- make the Xs matrix
@@ -54,9 +54,15 @@ z0 <- Sys.time()
               tmp_data$tmpX <- interaction( tmp_data[,rrgroup_name], tmp_data[,"no_vars"] )
               Xs = outer(tmp_data[,"tmpX"], unique(tmp_data[,"tmpX"]), '==')*1
          } else {
-              Xs = outer(tmp_data[,"no_vars"], unique(tmp_data[,"no_vars"]), '==')*1
+            # Xs = outer(tmp_data[,"no_vars"], unique(tmp_data[,"no_vars"]), '==')*1
+            c1 <- unique(tmp_data[,"no_vars"])
+            n2 <- length(c1)
+            n1 <- nrow(tmp_data)
+            m1 <- matrix(tmp_data[,"no_vars"], nrow=n1, ncol=n2)
+            m2 <- matrix(c1, nrow=n1, ncol=n2, byrow=TRUE)
+            Xs <- 1*(m1 == m2)
          }
-         
+
          #- make the y-index matrix
          y_index <- tmp_data[,c(group.var,rrgroup_name,"Actor","Partner","DyadNo_SRM","no_vars","y")]
          

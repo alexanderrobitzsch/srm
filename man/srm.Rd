@@ -1,11 +1,12 @@
 %% File Name: srm.Rd
-%% File Version: 0.13
+%% File Version: 0.154
 
 \name{srm}
 \alias{srm}
 \alias{coef.srm}
 \alias{vcov.srm}
 \alias{summary.srm}
+\alias{logLik.srm}
 %- Also NEED an '\alias' for EACH other topic documented here.
 
 \title{
@@ -30,6 +31,7 @@ srm(model.syntax = NULL, data = NULL, group.var = NULL, rrgroup_name = NULL,
 \method{coef}{srm}(object, ...)
 \method{vcov}{srm}(object, ...)
 \method{summary}{srm}(object, digits=3, file=NULL, ...)
+\method{logLik}{srm}(object, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -135,9 +137,70 @@ routines for the SRM.
 
 
 \examples{
+#############################################################################
+# EXAMPLE 1: Univariate SRM
+#############################################################################
+
+data(data.srm01, package="srm")
+dat <- data.srm01
+
+#-- define model
+mf <- '
+\%Person
+F1@A =~ 1*Wert1@A
+F1@P =~ 1*Wert1@P
+Wert1@A ~~ 0*Wert1@A + 0*Wert1@P
+Wert1@P ~~ 0*Wert1@P
+
+\%Dyad
+F1@AP =~ 1*Wert1@AP
+F1@PA =~ 1*Wert1@PA
+Wert1@AP ~~ 0*Wert1@AP + 0*Wert1@PA
+Wert1@PA ~~ 0*Wert1@PA
+'
+
+#-- estimate model
+mod1 <- srm::srm(mf, data = dat, rrgroup_name="Group", conv_par=1e-4, maxiter=20)
+summary(mod1)
+round(coef(mod1),3)
+
 \dontrun{
 #############################################################################
-# EXAMPLE 1: One-factor model
+# EXAMPLE 2: Bivariate SRM
+#############################################################################
+
+data(data.srm01, package="srm")
+dat <- data.srm01
+
+#-- define model
+mf <- '
+\%Person
+F1@A =~ 1*Wert1@A
+F1@P =~ 1*Wert1@P
+F2@A =~ 1*Wert2@A
+F2@P =~ 1*Wert2@P
+Wert1@A ~~ 0*Wert1@A + 0*Wert1@P
+Wert1@P ~~ 0*Wert1@P
+Wert2@A ~~ 0*Wert2@A + 0*Wert2@P
+Wert2@P ~~ 0*Wert2@P
+
+\%Dyad
+F1@AP =~ 1*Wert1@AP
+F1@PA =~ 1*Wert1@PA
+F2@AP =~ 1*Wert2@AP
+F2@PA =~ 1*Wert2@PA
+Wert1@AP ~~ 0*Wert1@AP + 0*Wert1@PA
+Wert1@PA ~~ 0*Wert1@PA
+Wert2@AP ~~ 0*Wert2@AP + 0*Wert2@PA
+Wert2@PA ~~ 0*Wert2@PA
+'
+
+#-- estimate model
+mod1 <- srm(mf, data = dat, rrgroup_name="Group", conv_par=1e-4, maxiter=20)
+summary(mod1)
+
+#############################################################################
+# EXAMPLE 3: One-factor model
 #############################################################################
 
 data(data.srm01, package="srm")

@@ -1,5 +1,5 @@
 %% File Name: srm_arbsrm.Rd
-%% File Version: 0.21
+%% File Version: 0.22
 
 \name{srm_arbsrm}
 \alias{srm_arbsrm}
@@ -61,7 +61,7 @@ List containing entries
 \references{
 Bond, C. F., & Malloy, T. E. (2018a). Social relations analysis of dyadic data structure:
 The general case. In T. E. Malloy. 
-\emph{Social Relations Modeling of Behavior in Dyads and Groups} (Ch. 14).
+\emph{Social relations modeling of behavior in dyads and groups} (Ch. 14).
 Academic Press. \doi{10.1016/B978-0-12-811967-9.00014-X}
 
 Bond, C. F., & Malloy, T. E. (2018b). \emph{ARBSRM - The general social relations model}.

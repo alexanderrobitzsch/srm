@@ -127,7 +127,9 @@ Nestler, 2018).</p>
 <span class='co'># S3 method for srm</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/vcov'>vcov</a></span>(<span class='no'>object</span>, <span class='no'>...</span>)
 <span class='co'># S3 method for srm</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>object</span>, <span class='kw'>digits</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='kw'>file</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>object</span>, <span class='kw'>digits</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='kw'>file</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='no'>...</span>)
+<span class='co'># S3 method for srm</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/logLik'>logLik</a></span>(<span class='no'>object</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -248,7 +250,69 @@ routines for the SRM.</p></div>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='co'>#############################################################################</span>
-<span class='co'># EXAMPLE 1: One-factor model</span>
+<span class='co'># EXAMPLE 1: Univariate SRM</span>
+<span class='co'>#############################################################################</span>
+
+<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>data.srm01</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"srm"</span>)
+<span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='no'>data.srm01</span>
+
+<span class='co'>#-- define model</span>
+<span class='no'>mf</span> <span class='kw'>&lt;-</span> <span class='st'>'
+%Person
+F1@A =~ 1*Wert1@A
+F1@P =~ 1*Wert1@P
+Wert1@A ~~ 0*Wert1@A + 0*Wert1@P
+Wert1@P ~~ 0*Wert1@P
+
+%Dyad
+F1@AP =~ 1*Wert1@AP
+F1@PA =~ 1*Wert1@PA
+Wert1@AP ~~ 0*Wert1@AP + 0*Wert1@PA
+Wert1@PA ~~ 0*Wert1@PA
+'</span>
+
+<span class='co'>#-- estimate model</span>
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>srm</span><span class='kw ns'>::</span><span class='fu'>srm</span>(<span class='no'>mf</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>dat</span>, <span class='kw'>rrgroup_name</span><span class='kw'>=</span><span class='st'>"Group"</span>, <span class='kw'>conv_par</span><span class='kw'>=</span><span class='fl'>1e-4</span>, <span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>20</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>mod1</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Round'>round</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/coef'>coef</a></span>(<span class='no'>mod1</span>),<span class='fl'>3</span>)
+
+<span class='co'># }</span><span class='co'># NOT RUN {</span>
+<span class='co'>#############################################################################</span>
+<span class='co'># EXAMPLE 2: Bivariate SRM</span>
+<span class='co'>#############################################################################</span>
+
+<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>data.srm01</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"srm"</span>)
+<span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='no'>data.srm01</span>
+
+<span class='co'>#-- define model</span>
+<span class='no'>mf</span> <span class='kw'>&lt;-</span> <span class='st'>'
+%Person
+F1@A =~ 1*Wert1@A
+F1@P =~ 1*Wert1@P
+F2@A =~ 1*Wert2@A
+F2@P =~ 1*Wert2@P
+Wert1@A ~~ 0*Wert1@A + 0*Wert1@P
+Wert1@P ~~ 0*Wert1@P
+Wert2@A ~~ 0*Wert2@A + 0*Wert2@P
+Wert2@P ~~ 0*Wert2@P
+
+%Dyad
+F1@AP =~ 1*Wert1@AP
+F1@PA =~ 1*Wert1@PA
+F2@AP =~ 1*Wert2@AP
+F2@PA =~ 1*Wert2@PA
+Wert1@AP ~~ 0*Wert1@AP + 0*Wert1@PA
+Wert1@PA ~~ 0*Wert1@PA
+Wert2@AP ~~ 0*Wert2@AP + 0*Wert2@PA
+Wert2@PA ~~ 0*Wert2@PA
+'</span>
+
+<span class='co'>#-- estimate model</span>
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='fu'>srm</span>(<span class='no'>mf</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>dat</span>, <span class='kw'>rrgroup_name</span><span class='kw'>=</span><span class='st'>"Group"</span>, <span class='kw'>conv_par</span><span class='kw'>=</span><span class='fl'>1e-4</span>, <span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>20</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>mod1</span>)
+
+<span class='co'>#############################################################################</span>
+<span class='co'># EXAMPLE 3: One-factor model</span>
 <span class='co'>#############################################################################</span>
 
 <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>data.srm01</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"srm"</span>)

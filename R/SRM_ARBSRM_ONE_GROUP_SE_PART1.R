@@ -1,5 +1,5 @@
 ## File Name: SRM_ARBSRM_ONE_GROUP_SE_PART1.R
-## File Version: 0.11
+## File Version: 0.12
 
 
 SRM_ARBSRM_ONE_GROUP_SE_PART1 <- function(vv, aa, uvv, ntot, j0, bivariate=TRUE)
@@ -46,7 +46,6 @@ SRM_ARBSRM_ONE_GROUP_SE_PART1 <- function(vv, aa, uvv, ntot, j0, bivariate=TRUE)
     garmat3_trace <- garmat1_trace
     garmat23_trace <- garmat1_trace
     
-
     # Here comes the time-consuming computation
     for (i1 in 1:6){ 
         dumi1 <- dum_list[[i1]]

@@ -20,7 +20,7 @@ CHANGELOG srm
 
 
 --------------------------------------------------------------------------
-VERSIONS srm 0.1  |  2019-05-23  |  Last: srm 0.1-139
+VERSIONS srm 0.1  |  2019-05-25  |  Last: srm 0.1-144
 --------------------------------------------------------------------------
  
 ADDED * added ML estimation function srm()
@@ -29,5 +29,5 @@ ADDED * included least squares estimation ARBSRM routine
 
 
 DATA  * data.bm1, data.bm2, data.srm01
-EXAMP * srm (1), srm_arbsrm (1)
+EXAMP * srm (1,2,3), srm_arbsrm (1)
 

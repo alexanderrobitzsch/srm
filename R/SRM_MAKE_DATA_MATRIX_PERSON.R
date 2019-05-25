@@ -1,5 +1,5 @@
 ## File Name: SRM_MAKE_DATA_MATRIX_PERSON.R
-## File Version: 0.21
+## File Version: 0.24
 
 
 SRM_MAKE_DATA_MATRIX_PERSON <- function(data = NULL,
@@ -49,7 +49,7 @@ SRM_MAKE_DATA_MATRIX_PERSON <- function(data = NULL,
                                  out
          })
      
-         res1 = rbind(res1, as.matrix( do.call ("rbind", person_matrix_list )))
+         res1 = rbind(res1, as.matrix( do.call("rbind", person_matrix_list )))
          res2 = rbind(res2, as.matrix( data.frame( rrgroup = rr, NI = no_person )) )
      
      }

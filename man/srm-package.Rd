@@ -1,5 +1,5 @@
 %% File Name: srm-package.Rd
-%% File Version: 0.05
+%% File Version: 0.06
 
 \name{srm-package}
 \alias{srm-package}
@@ -40,9 +40,9 @@ Maintainer: \packageMaintainer{srm}
 %----
 
 \references{
-Bond, C. F., & Malloy, T. E. (2018). Social relations analysis of dyadic data structure:
+Bond, C. F., & Malloy, T. E. (2018a). Social relations analysis of dyadic data structure:
 The general case. In T. E. Malloy. 
-\emph{Social Relations Modeling of Behavior in Dyads and Groups} (Ch. 14).
+\emph{Social relations modeling of behavior in dyads and groups} (Ch. 14).
 Academic Press. \doi{10.1016/B978-0-12-811967-9.00014-X}
 
 Gill, P. S., & Swartz, T. B. (2001). Statistical analyses for round robin interaction 

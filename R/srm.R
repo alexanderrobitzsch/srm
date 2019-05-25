@@ -1,5 +1,5 @@
 ## File Name: srm.R
-## File Version: 0.5891
+## File Version: 0.5906
 
 
 srm <- function(model.syntax = NULL, 
@@ -16,6 +16,8 @@ srm <- function(model.syntax = NULL,
     CALL <- match.call()
     v1 <- s1 <- Sys.time()
     method <- "ml"
+    # method <- "uls"
+    
     inv_type <- "pinv"
 z0 <- Sys.time()    
     
@@ -31,6 +33,7 @@ z0 <- Sys.time()
                         data_colnames = colnames(data) )
     var_names <- attr(parm.table, "var_names")
 # cat(" *** make partable ") ; z1 <- Sys.time(); print(z1-z0) ; z0 <- z1
+# Revalpr("parm.table")
 
     #-- add more information to parameter table
     # parm.table <- SRM_PARTABLE_ADD_NOISE(parm.table=parm.table, sd=.1)
@@ -74,7 +77,7 @@ z0 <- Sys.time()
     srm_optim_function <- function(x, parm.table, parm_list, symm_matrices,
         npar, data_list, NOP, parm_table_free, only_value=FALSE, only_gradient=FALSE)
     {
-        compute_gradient <- ! only_value
+        compute_gradient <- ! only_value        
         res <- SRM_OPTIMIZE(x=x, parm.table=parm.table, parm_list=parm_list, 
                     symm_matrices=symm_matrices, npar=npar,    data_list=data_list, 
                     NOP=NOP, parm_table_free=parm_table_free, use_rcpp=use_rcpp, 
@@ -91,7 +94,7 @@ z0 <- Sys.time()
         }        
         return(val)    
     }
-    
+
     #- optimization function for external optimizers
     srm_objective <- function(x, parm.table, parm_list, symm_matrices,
             npar, data_list, NOP, parm_table_free, method)

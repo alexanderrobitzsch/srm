@@ -1,5 +1,5 @@
 %% File Name: data.bm.Rd
-%% File Version: 0.07
+%% File Version: 0.09
 
 \name{data.bm}
 \alias{data.bm}
@@ -30,9 +30,9 @@ data(data.bm2)
 format. The two outcomes are arranged one below the other.
 
 \code{'data.frame':   32 obs. of  16 variables:} \cr
-\code{ $ a: int  -999 12 13 14 15 15 14 14 13 13 ...} \cr
-\code{ $ b: int  10 -999 10 18 7 15 14 8 12 12 ...} \cr
-\code{ $ c: int  13 12 -999 14 13 14 13 13 11 12 ...} \cr
+\code{ $ a: int  NA 12 13 14 15 15 14 14 13 13 ...} \cr
+\code{ $ b: int  10 NA 10 18 7 15 14 8 12 12 ...} \cr
+\code{ $ c: int  13 12 NA 14 13 14 13 13 11 12 ...} \cr
 \code{ [...] } \cr
 \code{ $ p: int  11 13 14 14 9 8 17 13 11 12 ...} \cr
 
@@ -52,9 +52,9 @@ which contains observations 9 to 16.
 }
 
 \references{
-Bond, C. F., & Malloy, T. E. (2018). Social relations analysis of dyadic data structure:
+Bond, C. F., & Malloy, T. E. (2018a). Social relations analysis of dyadic data structure:
 The general case. In T. E. Malloy. 
-\emph{Social Relations Modeling of Behavior in Dyads and Groups} (Ch. 14).
+\emph{Social relations modeling of behavior in dyads and groups} (Ch. 14).
 Academic Press. \doi{10.1016/B978-0-12-811967-9.00014-X}
 }
 
