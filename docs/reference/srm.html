@@ -120,7 +120,7 @@ Nestler, 2018).</p>
   <span class='kw'>person_names</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"Actor"</span>, <span class='st'>"Partner"</span>), <span class='kw'>fixed.groups</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>var_positive</span> <span class='kw'>=</span> -<span class='fl'>1</span>,
   <span class='kw'>optimizer</span> <span class='kw'>=</span> <span class='st'>"srm"</span>, <span class='kw'>maxiter</span> <span class='kw'>=</span> <span class='fl'>300</span>, <span class='kw'>conv_dev</span> <span class='kw'>=</span> <span class='fl'>1e-08</span>, <span class='kw'>conv_par</span> <span class='kw'>=</span> <span class='fl'>1e-06</span>,
   <span class='kw'>do_line_search</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>line_search_iter_max</span> <span class='kw'>=</span> <span class='fl'>6</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>use_rcpp</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>shortcut</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+  <span class='kw'>shortcut</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>use_woodbury</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='co'># S3 method for srm</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/coef'>coef</a></span>(<span class='no'>object</span>, <span class='no'>...</span>)
@@ -165,7 +165,7 @@ round robin design</p></td>
     </tr>
     <tr>
       <th>optimizer</th>
-      <td><p>Optimizer to be used: <code>"srm"</code> for internal optimization using 
+      <td><p>Optimizer to be used: <code>"srm"</code> for internal optimization using
 Fisher scoring and <code>"nlminb"</code> for L-FBGS optimization.</p></td>
     </tr>
     <tr>
@@ -198,8 +198,13 @@ Fisher scoring and <code>"nlminb"</code> for L-FBGS optimization.</p></td>
     </tr>
     <tr>
       <th>shortcut</th>
-      <td><p>Logical indicating whether shortcuts for round robin groups with 
+      <td><p>Logical indicating whether shortcuts for round robin groups with
 same structure should be used</p></td>
+    </tr>
+    <tr>
+      <th>use_woodbury</th>
+      <td><p>Logical indicating whether matrix inversion should
+be simplified by Woodbury identity</p></td>
     </tr>
     <tr>
       <th>object</th>
@@ -231,14 +236,14 @@ same structure should be used</p></td>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Gill, P. S., &amp; Swartz, T. B. (2001). Statistical analyses for round robin interaction 
+    <p>Gill, P. S., &amp; Swartz, T. B. (2001). Statistical analyses for round robin interaction
 data. <em>Canadian Journal of Statistics, 29</em>(2), 321-331.
 doi: <a href='http://doi.org/10.2307/3316080'>10.2307/3316080</a></p>
-<p>Nestler, S. (2018). Likelihood estimation of the multivariate social relations model. 
+<p>Nestler, S. (2018). Likelihood estimation of the multivariate social relations model.
 <em>Journal of Educational and Behavioral Statistics, 43</em>(4), 387-406.
 doi: <a href='http://doi.org/10.3102/1076998617741106'>10.3102/1076998617741106</a></p>
 <p>Warner, R. M., Kenny, D. A., &amp; Soto, M. (1979). A new round robin analysis of variance for
-social interaction data. <em>Journal of Personality and Social Psychology, 37</em>, 
+social interaction data. <em>Journal of Personality and Social Psychology, 37</em>,
 1742-1757. doi: <a href='http://doi.org/10.1037/0022-3514.37.10.1742'>10.1037/0022-3514.37.10.1742</a></p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -308,7 +313,7 @@ Wert2@PA ~~ 0*Wert2@PA
 '</span>
 
 <span class='co'>#-- estimate model</span>
-<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='fu'>srm</span>(<span class='no'>mf</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>dat</span>, <span class='kw'>rrgroup_name</span><span class='kw'>=</span><span class='st'>"Group"</span>, <span class='kw'>conv_par</span><span class='kw'>=</span><span class='fl'>1e-4</span>, <span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>20</span>)
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>srm</span><span class='kw ns'>::</span><span class='fu'>srm</span>(<span class='no'>mf</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>dat</span>, <span class='kw'>rrgroup_name</span><span class='kw'>=</span><span class='st'>"Group"</span>, <span class='kw'>conv_par</span><span class='kw'>=</span><span class='fl'>1e-4</span>, <span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>20</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>mod1</span>)
 
 <span class='co'>#############################################################################</span>
@@ -326,7 +331,7 @@ f1@A=~Wert1@A+Wert2@A+Wert3@A
 f1@P=~Wert1@P+Wert2@P+Wert3@P
 
 %Dyad
-f1@AP=~Wert1@AP+Wert2@AP+Wert3@AP    
+f1@AP=~Wert1@AP+Wert2@AP+Wert3@AP
 
 # define some constraints
 Wert1@AP ~~ 0*Wert1@PA

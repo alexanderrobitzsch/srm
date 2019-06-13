@@ -1,9 +1,9 @@
 ## File Name: SRM_OPEN_SINK.R
-## File Version: 0.01
+## File Version: 0.02
 
 SRM_OPEN_SINK <- function(file, suffix="__SUMMARY.Rout")
 {
-    if (!is.null(file)){ 
+    if (!is.null(file)){
         sink(paste0(file, suffix), split=TRUE)
     }
 }

@@ -1,9 +1,9 @@
 ## File Name: SRM_SUMMARY_PRINT_OUTPUT.R
-## File Version: 0.02
+## File Version: 0.03
 
 SRM_SUMMARY_PRINT_OUTPUT <- function(obji, round_from, round_to=NULL,
     digits=3)
-{    
+{
     if (is.null(round_to)){
         round_to <- ncol(obji)
     }

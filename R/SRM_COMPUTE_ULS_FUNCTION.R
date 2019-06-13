@@ -1,5 +1,5 @@
 ## File Name: SRM_COMPUTE_ULS_FUNCTION.R
-## File Version: 0.11
+## File Version: 0.19
 
 
 SRM_COMPUTE_ULS_FUNCTION <- function(args_eval, inv_type=NULL)
@@ -9,10 +9,11 @@ SRM_COMPUTE_ULS_FUNCTION <- function(args_eval, inv_type=NULL)
     muy <- args_eval$muy
     ny <- length(ey)
     f1 <- sum(ey^2) / ny
-    
+    f1 <- 0
     # cross-product matrix
     cpm <- ey * matrix(ey, nrow=ny, ncol=ny, byrow=TRUE)
     cov_resid <- cpm - SIGMA_Y  # observed minus expected
+
     # least squares function for covariance
     f2 <- sum(cov_resid^2) / ny
     ll <- f1 + f2

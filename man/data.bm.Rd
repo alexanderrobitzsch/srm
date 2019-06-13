@@ -1,5 +1,5 @@
 %% File Name: data.bm.Rd
-%% File Version: 0.09
+%% File Version: 0.10
 
 \name{data.bm}
 \alias{data.bm}
@@ -14,7 +14,7 @@ Dataset Bond and Malloy (2018)
 \description{
 This is the illustration dataset of Bond and Malloy (2018) for a bivariate
 social relations model. The round robin design contains 16 persons and
-some missing values for one person. 
+some missing values for one person.
 }
 
 \usage{
@@ -53,7 +53,7 @@ which contains observations 9 to 16.
 
 \references{
 Bond, C. F., & Malloy, T. E. (2018a). Social relations analysis of dyadic data structure:
-The general case. In T. E. Malloy. 
+The general case. In T. E. Malloy.
 \emph{Social relations modeling of behavior in dyads and groups} (Ch. 14).
 Academic Press. \doi{10.1016/B978-0-12-811967-9.00014-X}
 }
@@ -62,4 +62,4 @@ Academic Press. \doi{10.1016/B978-0-12-811967-9.00014-X}
 %data(data.bm1)
 %## maybe str(data.bm1) ; plot(data.bm1) ...
 %}
-\keyword{datasets}
+%% \keyword{datasets}

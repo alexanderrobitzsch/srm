@@ -6,6 +6,57 @@
 
 using namespace Rcpp;
 
+// SRM_RCPP_SIGMA_Y_INV_WOODBURY_PHI_INV
+Rcpp::NumericMatrix SRM_RCPP_SIGMA_Y_INV_WOODBURY_PHI_INV(Rcpp::NumericMatrix SIGMA_U_INV, int NI);
+RcppExport SEXP _srm_SRM_RCPP_SIGMA_Y_INV_WOODBURY_PHI_INV(SEXP SIGMA_U_INVSEXP, SEXP NISEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type SIGMA_U_INV(SIGMA_U_INVSEXP);
+    Rcpp::traits::input_parameter< int >::type NI(NISEXP);
+    rcpp_result_gen = Rcpp::wrap(SRM_RCPP_SIGMA_Y_INV_WOODBURY_PHI_INV(SIGMA_U_INV, NI));
+    return rcpp_result_gen;
+END_RCPP
+}
+// SRM_RCPP_SIGMA_Y_INV_WOODBURY_TMAT
+Rcpp::NumericMatrix SRM_RCPP_SIGMA_Y_INV_WOODBURY_TMAT(Rcpp::NumericMatrix A_inv, Rcpp::IntegerMatrix Z_ind, Rcpp::NumericMatrix Phi_inv);
+RcppExport SEXP _srm_SRM_RCPP_SIGMA_Y_INV_WOODBURY_TMAT(SEXP A_invSEXP, SEXP Z_indSEXP, SEXP Phi_invSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type A_inv(A_invSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type Z_ind(Z_indSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type Phi_inv(Phi_invSEXP);
+    rcpp_result_gen = Rcpp::wrap(SRM_RCPP_SIGMA_Y_INV_WOODBURY_TMAT(A_inv, Z_ind, Phi_inv));
+    return rcpp_result_gen;
+END_RCPP
+}
+// SRM_RCPP_SIGMA_Y_INV_WOODBURY_ZA
+Rcpp::NumericMatrix SRM_RCPP_SIGMA_Y_INV_WOODBURY_ZA(Rcpp::IntegerMatrix Z_ind, Rcpp::NumericMatrix A_inv, int NZ);
+RcppExport SEXP _srm_SRM_RCPP_SIGMA_Y_INV_WOODBURY_ZA(SEXP Z_indSEXP, SEXP A_invSEXP, SEXP NZSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type Z_ind(Z_indSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type A_inv(A_invSEXP);
+    Rcpp::traits::input_parameter< int >::type NZ(NZSEXP);
+    rcpp_result_gen = Rcpp::wrap(SRM_RCPP_SIGMA_Y_INV_WOODBURY_ZA(Z_ind, A_inv, NZ));
+    return rcpp_result_gen;
+END_RCPP
+}
+// SRM_RCPP_SIGMA_Y_INV_WOODBURY_Y_INV
+Rcpp::NumericMatrix SRM_RCPP_SIGMA_Y_INV_WOODBURY_Y_INV(Rcpp::NumericMatrix ZA, Rcpp::NumericMatrix T_inv, Rcpp::NumericMatrix A_inv);
+RcppExport SEXP _srm_SRM_RCPP_SIGMA_Y_INV_WOODBURY_Y_INV(SEXP ZASEXP, SEXP T_invSEXP, SEXP A_invSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type ZA(ZASEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type T_inv(T_invSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type A_inv(A_invSEXP);
+    rcpp_result_gen = Rcpp::wrap(SRM_RCPP_SIGMA_Y_INV_WOODBURY_Y_INV(ZA, T_inv, A_inv));
+    return rcpp_result_gen;
+END_RCPP
+}
 // SRM_RCPP_COLSUMS
 Rcpp::NumericVector SRM_RCPP_COLSUMS(Rcpp::NumericMatrix x);
 RcppExport SEXP _srm_SRM_RCPP_COLSUMS(SEXP xSEXP) {
@@ -128,15 +179,40 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// SRM_RCPP_SRM_COMPUTE_NONZERO_GRADIENT
-Rcpp::LogicalMatrix SRM_RCPP_SRM_COMPUTE_NONZERO_GRADIENT(Rcpp::NumericMatrix sigma_y_der, double eps);
-RcppExport SEXP _srm_SRM_RCPP_SRM_COMPUTE_NONZERO_GRADIENT(SEXP sigma_y_derSEXP, SEXP epsSEXP) {
+// SRM_RCPP_SRM_COMPUTE_LOG_LIKELIHOOD_GRADIENT_W1
+arma::mat SRM_RCPP_SRM_COMPUTE_LOG_LIKELIHOOD_GRADIENT_W1(arma::mat sigma_y_inv, arma::mat sigma_y_der);
+RcppExport SEXP _srm_SRM_RCPP_SRM_COMPUTE_LOG_LIKELIHOOD_GRADIENT_W1(SEXP sigma_y_invSEXP, SEXP sigma_y_derSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type sigma_y_inv(sigma_y_invSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type sigma_y_der(sigma_y_derSEXP);
+    rcpp_result_gen = Rcpp::wrap(SRM_RCPP_SRM_COMPUTE_LOG_LIKELIHOOD_GRADIENT_W1(sigma_y_inv, sigma_y_der));
+    return rcpp_result_gen;
+END_RCPP
+}
+// SRM_RCPP_SRM_COMPUTE_LOG_LIKELIHOOD_GRADIENT_W2
+Rcpp::NumericMatrix SRM_RCPP_SRM_COMPUTE_LOG_LIKELIHOOD_GRADIENT_W2(Rcpp::NumericMatrix sigma_y_inv, Rcpp::NumericMatrix sigma_y_der, Rcpp::IntegerMatrix der_bool);
+RcppExport SEXP _srm_SRM_RCPP_SRM_COMPUTE_LOG_LIKELIHOOD_GRADIENT_W2(SEXP sigma_y_invSEXP, SEXP sigma_y_derSEXP, SEXP der_boolSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type sigma_y_inv(sigma_y_invSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type sigma_y_der(sigma_y_derSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type der_bool(der_boolSEXP);
+    rcpp_result_gen = Rcpp::wrap(SRM_RCPP_SRM_COMPUTE_LOG_LIKELIHOOD_GRADIENT_W2(sigma_y_inv, sigma_y_der, der_bool));
+    return rcpp_result_gen;
+END_RCPP
+}
+// SRM_RCPP_SRM_COMPUTE_NONZERO_GRADIENT_INDICES
+Rcpp::IntegerMatrix SRM_RCPP_SRM_COMPUTE_NONZERO_GRADIENT_INDICES(Rcpp::NumericMatrix sigma_y_der, double eps);
+RcppExport SEXP _srm_SRM_RCPP_SRM_COMPUTE_NONZERO_GRADIENT_INDICES(SEXP sigma_y_derSEXP, SEXP epsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type sigma_y_der(sigma_y_derSEXP);
     Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
-    rcpp_result_gen = Rcpp::wrap(SRM_RCPP_SRM_COMPUTE_NONZERO_GRADIENT(sigma_y_der, eps));
+    rcpp_result_gen = Rcpp::wrap(SRM_RCPP_SRM_COMPUTE_NONZERO_GRADIENT_INDICES(sigma_y_der, eps));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -164,6 +240,78 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// SRM_RCPP_ORDER
+Rcpp::IntegerVector SRM_RCPP_ORDER(Rcpp::NumericVector x);
+RcppExport SEXP _srm_SRM_RCPP_ORDER(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(SRM_RCPP_ORDER(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// SRM_RCPP_SRM_MAKE_DATA_MATRIX_PERSON_ONE_PERSON
+Rcpp::NumericMatrix SRM_RCPP_SRM_MAKE_DATA_MATRIX_PERSON_ONE_PERSON(Rcpp::NumericMatrix tmp_data3, int no_person, int no_vars, int rr, int person, int pid);
+RcppExport SEXP _srm_SRM_RCPP_SRM_MAKE_DATA_MATRIX_PERSON_ONE_PERSON(SEXP tmp_data3SEXP, SEXP no_personSEXP, SEXP no_varsSEXP, SEXP rrSEXP, SEXP personSEXP, SEXP pidSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type tmp_data3(tmp_data3SEXP);
+    Rcpp::traits::input_parameter< int >::type no_person(no_personSEXP);
+    Rcpp::traits::input_parameter< int >::type no_vars(no_varsSEXP);
+    Rcpp::traits::input_parameter< int >::type rr(rrSEXP);
+    Rcpp::traits::input_parameter< int >::type person(personSEXP);
+    Rcpp::traits::input_parameter< int >::type pid(pidSEXP);
+    rcpp_result_gen = Rcpp::wrap(SRM_RCPP_SRM_MAKE_DATA_MATRIX_PERSON_ONE_PERSON(tmp_data3, no_person, no_vars, rr, person, pid));
+    return rcpp_result_gen;
+END_RCPP
+}
+// SRM_RCPP_SRM_MAKE_DATA_MATRIX_PERSON
+Rcpp::NumericMatrix SRM_RCPP_SRM_MAKE_DATA_MATRIX_PERSON(Rcpp::NumericMatrix tmp_data3, int no_person, int no_vars, int rr, Rcpp::IntegerVector persons);
+RcppExport SEXP _srm_SRM_RCPP_SRM_MAKE_DATA_MATRIX_PERSON(SEXP tmp_data3SEXP, SEXP no_personSEXP, SEXP no_varsSEXP, SEXP rrSEXP, SEXP personsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type tmp_data3(tmp_data3SEXP);
+    Rcpp::traits::input_parameter< int >::type no_person(no_personSEXP);
+    Rcpp::traits::input_parameter< int >::type no_vars(no_varsSEXP);
+    Rcpp::traits::input_parameter< int >::type rr(rrSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type persons(personsSEXP);
+    rcpp_result_gen = Rcpp::wrap(SRM_RCPP_SRM_MAKE_DATA_MATRIX_PERSON(tmp_data3, no_person, no_vars, rr, persons));
+    return rcpp_result_gen;
+END_RCPP
+}
+// SRM_RCPP_SRM_MAKE_DATA_MATRIX_DYAD_ONE_DYAD
+Rcpp::NumericMatrix SRM_RCPP_SRM_MAKE_DATA_MATRIX_DYAD_ONE_DYAD(Rcpp::NumericMatrix tmp_data3, int no_vars, int rr, int dyad, int did);
+RcppExport SEXP _srm_SRM_RCPP_SRM_MAKE_DATA_MATRIX_DYAD_ONE_DYAD(SEXP tmp_data3SEXP, SEXP no_varsSEXP, SEXP rrSEXP, SEXP dyadSEXP, SEXP didSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type tmp_data3(tmp_data3SEXP);
+    Rcpp::traits::input_parameter< int >::type no_vars(no_varsSEXP);
+    Rcpp::traits::input_parameter< int >::type rr(rrSEXP);
+    Rcpp::traits::input_parameter< int >::type dyad(dyadSEXP);
+    Rcpp::traits::input_parameter< int >::type did(didSEXP);
+    rcpp_result_gen = Rcpp::wrap(SRM_RCPP_SRM_MAKE_DATA_MATRIX_DYAD_ONE_DYAD(tmp_data3, no_vars, rr, dyad, did));
+    return rcpp_result_gen;
+END_RCPP
+}
+// SRM_RCPP_SRM_MAKE_DATA_MATRIX_DYAD
+Rcpp::NumericMatrix SRM_RCPP_SRM_MAKE_DATA_MATRIX_DYAD(Rcpp::NumericMatrix tmp_data3, int no_vars, int rr, int no_dyads, Rcpp::NumericVector dyads);
+RcppExport SEXP _srm_SRM_RCPP_SRM_MAKE_DATA_MATRIX_DYAD(SEXP tmp_data3SEXP, SEXP no_varsSEXP, SEXP rrSEXP, SEXP no_dyadsSEXP, SEXP dyadsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type tmp_data3(tmp_data3SEXP);
+    Rcpp::traits::input_parameter< int >::type no_vars(no_varsSEXP);
+    Rcpp::traits::input_parameter< int >::type rr(rrSEXP);
+    Rcpp::traits::input_parameter< int >::type no_dyads(no_dyadsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type dyads(dyadsSEXP);
+    rcpp_result_gen = Rcpp::wrap(SRM_RCPP_SRM_MAKE_DATA_MATRIX_DYAD(tmp_data3, no_vars, rr, no_dyads, dyads));
+    return rcpp_result_gen;
+END_RCPP
+}
 // SRM_RCPP_SRM_ULS_GRADIENT_SIGMA_PART
 double SRM_RCPP_SRM_ULS_GRADIENT_SIGMA_PART(Rcpp::NumericMatrix cov_resid, Rcpp::NumericMatrix SIGMA_Y_der, Rcpp::LogicalMatrix der_bool);
 RcppExport SEXP _srm_SRM_RCPP_SRM_ULS_GRADIENT_SIGMA_PART(SEXP cov_residSEXP, SEXP SIGMA_Y_derSEXP, SEXP der_boolSEXP) {
@@ -179,6 +327,10 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_srm_SRM_RCPP_SIGMA_Y_INV_WOODBURY_PHI_INV", (DL_FUNC) &_srm_SRM_RCPP_SIGMA_Y_INV_WOODBURY_PHI_INV, 2},
+    {"_srm_SRM_RCPP_SIGMA_Y_INV_WOODBURY_TMAT", (DL_FUNC) &_srm_SRM_RCPP_SIGMA_Y_INV_WOODBURY_TMAT, 3},
+    {"_srm_SRM_RCPP_SIGMA_Y_INV_WOODBURY_ZA", (DL_FUNC) &_srm_SRM_RCPP_SIGMA_Y_INV_WOODBURY_ZA, 3},
+    {"_srm_SRM_RCPP_SIGMA_Y_INV_WOODBURY_Y_INV", (DL_FUNC) &_srm_SRM_RCPP_SIGMA_Y_INV_WOODBURY_Y_INV, 3},
     {"_srm_SRM_RCPP_COLSUMS", (DL_FUNC) &_srm_SRM_RCPP_COLSUMS, 1},
     {"_srm_SRM_RCPP_ROWSUMS", (DL_FUNC) &_srm_SRM_RCPP_ROWSUMS, 1},
     {"_srm_SRM_ARBSRM_TRACE_PRODUCT_MATRIX", (DL_FUNC) &_srm_SRM_ARBSRM_TRACE_PRODUCT_MATRIX, 2},
@@ -189,9 +341,16 @@ static const R_CallMethodDef CallEntries[] = {
     {"_srm_SRM_RCPP_SRM_ARBSRM_SE_CREATE_CWU", (DL_FUNC) &_srm_SRM_RCPP_SRM_ARBSRM_SE_CREATE_CWU, 1},
     {"_srm_SRM_RCPP_SRM_COMPUTE_HESSIAN_RR", (DL_FUNC) &_srm_SRM_RCPP_SRM_COMPUTE_HESSIAN_RR, 5},
     {"_srm_SRM_RCPP_SRM_COMPUTE_LOG_LIKELIHOOD_GRADIENT_W0", (DL_FUNC) &_srm_SRM_RCPP_SRM_COMPUTE_LOG_LIKELIHOOD_GRADIENT_W0, 3},
-    {"_srm_SRM_RCPP_SRM_COMPUTE_NONZERO_GRADIENT", (DL_FUNC) &_srm_SRM_RCPP_SRM_COMPUTE_NONZERO_GRADIENT, 2},
+    {"_srm_SRM_RCPP_SRM_COMPUTE_LOG_LIKELIHOOD_GRADIENT_W1", (DL_FUNC) &_srm_SRM_RCPP_SRM_COMPUTE_LOG_LIKELIHOOD_GRADIENT_W1, 2},
+    {"_srm_SRM_RCPP_SRM_COMPUTE_LOG_LIKELIHOOD_GRADIENT_W2", (DL_FUNC) &_srm_SRM_RCPP_SRM_COMPUTE_LOG_LIKELIHOOD_GRADIENT_W2, 3},
+    {"_srm_SRM_RCPP_SRM_COMPUTE_NONZERO_GRADIENT_INDICES", (DL_FUNC) &_srm_SRM_RCPP_SRM_COMPUTE_NONZERO_GRADIENT_INDICES, 2},
     {"_srm_SRM_RCPP_SRM_DATA_LIST_CREATE_INSERTION_MATRIX", (DL_FUNC) &_srm_SRM_RCPP_SRM_DATA_LIST_CREATE_INSERTION_MATRIX, 1},
     {"_srm_SRM_RCPP_SRM_INSERT_ELEMENTS", (DL_FUNC) &_srm_SRM_RCPP_SRM_INSERT_ELEMENTS, 3},
+    {"_srm_SRM_RCPP_ORDER", (DL_FUNC) &_srm_SRM_RCPP_ORDER, 1},
+    {"_srm_SRM_RCPP_SRM_MAKE_DATA_MATRIX_PERSON_ONE_PERSON", (DL_FUNC) &_srm_SRM_RCPP_SRM_MAKE_DATA_MATRIX_PERSON_ONE_PERSON, 6},
+    {"_srm_SRM_RCPP_SRM_MAKE_DATA_MATRIX_PERSON", (DL_FUNC) &_srm_SRM_RCPP_SRM_MAKE_DATA_MATRIX_PERSON, 5},
+    {"_srm_SRM_RCPP_SRM_MAKE_DATA_MATRIX_DYAD_ONE_DYAD", (DL_FUNC) &_srm_SRM_RCPP_SRM_MAKE_DATA_MATRIX_DYAD_ONE_DYAD, 5},
+    {"_srm_SRM_RCPP_SRM_MAKE_DATA_MATRIX_DYAD", (DL_FUNC) &_srm_SRM_RCPP_SRM_MAKE_DATA_MATRIX_DYAD, 5},
     {"_srm_SRM_RCPP_SRM_ULS_GRADIENT_SIGMA_PART", (DL_FUNC) &_srm_SRM_RCPP_SRM_ULS_GRADIENT_SIGMA_PART, 3},
     {NULL, NULL, 0}
 };

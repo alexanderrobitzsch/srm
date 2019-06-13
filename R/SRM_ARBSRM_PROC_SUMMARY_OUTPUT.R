@@ -1,5 +1,5 @@
 ## File Name: SRM_ARBSRM_PROC_SUMMARY_OUTPUT.R
-## File Version: 0.04
+## File Version: 0.05
 
 
 SRM_ARBSRM_PROC_SUMMARY_OUTPUT <- function(est, se)
@@ -30,7 +30,7 @@ SRM_ARBSRM_PROC_SUMMARY_OUTPUT <- function(est, se)
     par_summary$p <- 2*stats::pnorm( - abs(par_summary$t) )
     #- coefficient vector
     coef <- par_summary$est
-    names(coef) <- par_summary$par    
+    names(coef) <- par_summary$par
     #--- output
     res <- list(par_summary=par_summary, coef=coef)
     return(res)

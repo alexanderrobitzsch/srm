@@ -1,10 +1,10 @@
 ## File Name: SRM_ARBSRM_BOND_MALLOY.R
-## File Version: 0.24
+## File Version: 0.25
 
 
 
 ## This function contains the code of
-## Bond & Malloy (2018). ARBSRM – The General Social Relations Model 
+## Bond & Malloy (2018). ARBSRM – The General Social Relations Model
 ## http://thomasemalloy.org/arbsrm-the-general-social-relations-model/
 ## copied and slightly edited from the file
 ## http://thomasemalloy.org/wp-content/uploads/2017/09/arbcodeR.pdf
@@ -14,14 +14,14 @@ SRM_ARBSRM_BOND_MALLOY <- function(data, serror=TRUE)
     CALL <- match.call()
     s1 <- Sys.time()
     miss <- -999
-    data[ is.na(data) ] <- miss    
+    data[ is.na(data) ] <- miss
     nact <- nrow(data)
     npar <- ncol(data)
     ntot <- 0
     for (i in 1:nact) {
         for (j in 1:npar) {
-            if (data[i,j]!=miss){    
-                ntot<-ntot+1 
+            if (data[i,j]!=miss){
+                ntot<-ntot+1
             }
         }
     }
@@ -39,9 +39,9 @@ SRM_ARBSRM_BOND_MALLOY <- function(data, serror=TRUE)
                 if (i<l) {
                     inde[k,1]<-i #For each data point, first
                     inde[k,2]<-j
-                } 
+                }
             } #and second subscripts.
-        } 
+        }
     }
 
     ntot <- k/2
@@ -50,7 +50,7 @@ SRM_ARBSRM_BOND_MALLOY <- function(data, serror=TRUE)
     pa <- matrix(0,ntot,npar)
     for (k in 1:ntot){
         ac[k,inde[k,1]]<-1 # indicator matrices for
-        pa[k,inde[k,2]]<-1 
+        pa[k,inde[k,2]]<-1
     } # actor and partner
 
     apar <- colSums(ac)
@@ -78,8 +78,8 @@ SRM_ARBSRM_BOND_MALLOY <- function(data, serror=TRUE)
 
     for (i in 1:ntot){
         for (j in (4*ntot+1):(5*ntot)){
-            aa[i,j]<-aa[i,j]-1/ntot 
-        } 
+            aa[i,j]<-aa[i,j]-1/ntot
+        }
     }
     for (i in 1:ntot) {
         aa[i,i]<-1-1/pact[inde[i,2]]
@@ -101,20 +101,20 @@ SRM_ARBSRM_BOND_MALLOY <- function(data, serror=TRUE)
                 if (inde[i,2]==inde[j,2]) aa[i,j]<--1/pact[inde[i,2]]
                 if (inde[i,1]==inde[j,2]) vv[i,(2*ntot+j)]<-1
                 if (inde[i,2]==inde[j,1]) vv[i,(3*ntot+j)]<-1
-            } 
+            }
         }
     }
     mirr <- rowSums(recip)
     for (i in 1:ntot){
         for (j in 1:ntot){
             if ((recip[inde[i,1],inde[i,2]]!=0) & (recip[inde[j,1],inde[j,2]]!=0)){
-                if ((inde[i,1]==inde[j,2]) & (inde[i,2]==inde[j,1])){ 
+                if ((inde[i,1]==inde[j,2]) & (inde[i,2]==inde[j,1])){
                     aa[i,(3*ntot+j)]<-(mirr[inde[i,1]]-1)/mirr[inde[i,1]]
                     aa[i,(2*ntot+j)]<-(mirr[inde[j,1]]-1)/mirr[inde[j,1]]
                 }
                 if ((inde[i,1]!=inde[j,2]) & (inde[i,2]==inde[j,1])) aa[i,(2*ntot+j)]<--1/mirr[inde[j,1]]
                 if ((inde[i,1]==inde[j,2]) & (inde[i,2]!=inde[j,1])) aa[i,(3*ntot+j)]<--1/mirr[inde[i,1]]
-            } 
+            }
         }
     }
 
@@ -128,10 +128,10 @@ SRM_ARBSRM_BOND_MALLOY <- function(data, serror=TRUE)
     uu <- matrix(0,ntot,ntot)
     for (i in 1:6){
         dumi<-((i-1)*ntot+1):(i*ntot)
-        if ((i<3) | (i>4)){ 
+        if ((i<3) | (i>4)){
             for (j in 1:6){
                 dumj<-((j-1)*ntot+1):(j*ntot)
-                c[i,j]<-sum(diag(aa[,dumi]%*%vv[,dumj])) 
+                c[i,j]<-sum(diag(aa[,dumi]%*%vv[,dumj]))
             }
         }
         if ((i==3) | (i==4)){
@@ -139,21 +139,21 @@ SRM_ARBSRM_BOND_MALLOY <- function(data, serror=TRUE)
             for (j in 1:6) {
                 dumj<-((j-1)*ntot+1):(j*ntot)
                 uu<-vv[,dumj]
-                c[i,j]<-.5*(sum(diag(zz%*%t(uu))) + sum(diag((t(zz)%*%uu))) ) 
-            } 
+                c[i,j]<-.5*(sum(diag(zz%*%t(uu))) + sum(diag((t(zz)%*%uu))) )
+            }
         }
     }
     cin <- solve(c)
-    for (i in 1:6){ 
+    for (i in 1:6){
         dumi<-((i-1)*ntot+1):(i*ntot)
         ss[i,1] <- t(dv[1:ntot])%*%aa[,dumi]%*%dv[1:ntot]
         ss[i,2] <- t(dv[(ntot+1):(2*ntot)])%*%aa[,dumi]%*%dv[(ntot+1):(2*ntot)]
-        ss[i,3]<-t(dv[1:ntot])%*%aa[,dumi]%*%dv[(ntot+1):(2*ntot)] 
+        ss[i,3]<-t(dv[1:ntot])%*%aa[,dumi]%*%dv[(ntot+1):(2*ntot)]
     }
     est <- matrix(0,6,3)
-    est <- cin %*% ss # Here are the parameter estimates    
+    est <- cin %*% ss # Here are the parameter estimates
     s2 <- Sys.time()
-    
+
     #--- standard errors
     se <- NA*est
     if (serror) {
@@ -177,21 +177,21 @@ SRM_ARBSRM_BOND_MALLOY <- function(data, serror=TRUE)
         for (i in foo){
             cwu[3,j]=i
             cwu[j,3]=i
-            j=j+1 
-        }    
+            j=j+1
+        }
         j=4
         foo=c(90,96,102)
         for (i in foo){
             cwu[4,j]=i
             cwu[j,4]=i
-            j=j+1 
+            j=j+1
         }
         cwu[5,5]=108
         cwu[6,5]=114 # an accounting variable,
         cwu[5,6]=114 # cwu will point us to the
         cwu[6,6]=120 # right parms, SS, and SCP
         # Here comes the time-consuming computation
-        for (i1 in 1:6){ 
+        for (i1 in 1:6){
             dumi1=(ntot*(i1-1)+1):(i1*ntot)
             w1=0
             for (j1 in 1:6){
@@ -224,7 +224,7 @@ SRM_ARBSRM_BOND_MALLOY <- function(data, serror=TRUE)
                 } # end i2 loop
             } # end j1 loop
             for (i2 in 1:6){
-                dumi2=(ntot*(i2-1)+1):(i2*ntot)    
+                dumi2=(ntot*(i2-1)+1):(i2*ntot)
                 w1=i2+120
                 for (j1 in 1:5) {
                     jj1=j1
@@ -240,7 +240,7 @@ SRM_ARBSRM_BOND_MALLOY <- function(data, serror=TRUE)
                         w[i1,w1]=w[i1,w1]+sum(diag(aa[,j0[dumi1]]%*%uu%*%aa[,dumi2]%*%zz))
                     }
                 }
-            } 
+            }
         } # End i2 and i1 loops and end time-consuming computation
         b=matrix(0,46,46)
         var=matrix(0,6,6)
@@ -251,8 +251,8 @@ SRM_ARBSRM_BOND_MALLOY <- function(data, serror=TRUE)
             for (i1 in 1:6){
                 for (i2 in i1:6) {
                     r1=r1+1
-                    b[r1,j1]=var[i1,i2] 
-                } 
+                    b[r1,j1]=var[i1,i2]
+                }
             }
             if (j1<22){
                 r2=21
@@ -269,14 +269,14 @@ SRM_ARBSRM_BOND_MALLOY <- function(data, serror=TRUE)
                         if (i2==3) bare=(var[ii1,3]+var[ii1,4])/2
                         if ((i1==3) & (i2==3))
                         bare=(var[3,3]+var[3,4]+var[4,3]+var[4,4])/4
-                        b[r2,j1]=bare 
-                    } 
+                        b[r2,j1]=bare
+                    }
                 } # b gives exact vars and covs    # among parameter estimates
             }
         }
         bi=diag(46)
         bi=b+bi
-        bi=solve(bi) # the biggest inversion                
+        bi=solve(bi) # the biggest inversion
         bb<-matrix(0,6,46)
         dn<-c(1,7,12,16,19,21)
         for (i in 1:6) {
@@ -300,16 +300,16 @@ SRM_ARBSRM_BOND_MALLOY <- function(data, serror=TRUE)
             if (kk==2) matrx<- yvec %o% yvec
             if (kk==3) matrx<- yvec %o% xvec
             estp[22:46]<-c(matrx)
-            oot[,kk] = bb %*% estp 
+            oot[,kk] = bb %*% estp
         }
-        oot = oot**.5 # converting var to se    
+        oot = oot**.5 # converting var to se
         se = oot
-    } # oot gives estimated variances and covs    
-    
-                
+    } # oot gives estimated variances and covs
+
+
     #--- output
     s3 <- Sys.time()
     time <- list(start=s1, end=s3, time_est=s2-s1, time_se=s3-s2)
-    res <- list(est=est, se=se, serror=serror, time=time)    
+    res <- list(est=est, se=se, serror=serror, time=time)
     return(res)
 }

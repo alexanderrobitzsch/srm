@@ -1,5 +1,5 @@
 //// File Name: SRM_RCPP_SRM_ARBSRM.cpp
-//// File Version: 0.433
+//// File Version: 0.434
 
 
 // [[Rcpp::depends(RcppArmadillo)]]
@@ -64,7 +64,7 @@ double SRM_ARBSRM_TRACE_PRODUCT_MATRIX(Rcpp::NumericMatrix x, Rcpp::NumericMatri
                 z += x(ii,hh)*y(hh,ii);
             // }
         }
-    }        
+    }
     //--- OUTPUT:
     return z;
 }
@@ -81,18 +81,18 @@ double SRM_ARBSRM_TRACE_PRODUCT_MATRIX_TRANSPOSE(Rcpp::NumericMatrix x, Rcpp::Nu
     for (int ii=0; ii<nr; ii++){
         for (int hh=0; hh<nc; hh++){
             if ( ( x(ii,hh)!=0 ) | (y(ii,hh)!= 0 ) ){
-                z += x(ii,hh)*y(ii,hh);                
+                z += x(ii,hh)*y(ii,hh);
             }
         }
     }
     for (int ii=0; ii<nr; ii++){
         for (int hh=0; hh<nc; hh++){
             if ( ( x(hh,ii)!=0 ) | (y(hh,ii)!= 0 ) ){
-                z += x(hh,ii)*y(hh,ii);                
+                z += x(hh,ii)*y(hh,ii);
             }
         }
-    }        
-    z = 0.5*z;    
+    }
+    z = 0.5*z;
     //--- OUTPUT:
     return z;
 }
@@ -102,7 +102,7 @@ double SRM_ARBSRM_TRACE_PRODUCT_MATRIX_TRANSPOSE(Rcpp::NumericMatrix x, Rcpp::Nu
 ///********************************************************************
 ///** SRM_RCPP_SRM_ARBSRM_ONE_GROUP_ESTIMATE
 // [[Rcpp::export]]
-Rcpp::List SRM_RCPP_SRM_ARBSRM_ONE_GROUP_ESTIMATE( Rcpp::NumericMatrix data, 
+Rcpp::List SRM_RCPP_SRM_ARBSRM_ONE_GROUP_ESTIMATE( Rcpp::NumericMatrix data,
     Rcpp::LogicalMatrix data_resp, bool bivariate )
 {
     int nact = data.nrow();
@@ -123,12 +123,12 @@ Rcpp::List SRM_RCPP_SRM_ARBSRM_ONE_GROUP_ESTIMATE( Rcpp::NumericMatrix data,
                 if (i+1<l) {
                     inde(k,0) = i;
                     inde(k,1) = j;
-                } 
+                }
                 k++;
-            } 
-        } 
-    }    
-    
+            }
+        }
+    }
+
     // indicator matrices actor and partner effects
     ntot = k/2;
     nact = nact/2;
@@ -144,9 +144,9 @@ Rcpp::List SRM_RCPP_SRM_ARBSRM_ONE_GROUP_ESTIMATE( Rcpp::NumericMatrix data,
     Rcpp::NumericVector mirr(nact);
     Rcpp::NumericMatrix recip(nact,npar);
     int ntot2 = 2*ntot;
-    int ntot3 = 3*ntot;    
+    int ntot3 = 3*ntot;
     int ntot4 = 4*ntot;
-    int ntot5 = 5*ntot;    
+    int ntot5 = 5*ntot;
     int ntot6 = 6*ntot;
     Rcpp::NumericMatrix aa(ntot,ntot6);
     Rcpp::NumericMatrix vv(ntot,ntot6);
@@ -157,7 +157,7 @@ Rcpp::List SRM_RCPP_SRM_ARBSRM_ONE_GROUP_ESTIMATE( Rcpp::NumericMatrix data,
         j0[ii] = ii+ntot;
         j0[ii+ntot] = ii;
     }
-    
+
     int ii = 0;
     for (int i=0; i<ntot; i++){
         aa(i,i) = 1;
@@ -168,15 +168,15 @@ Rcpp::List SRM_RCPP_SRM_ARBSRM_ONE_GROUP_ESTIMATE( Rcpp::NumericMatrix data,
         ii = ntot4+i;
         aa(i,ii) = 1;
         vv(i,ii) = 1;
-    }    
+    }
 
     double ntot0 = 1.0/( (double)ntot );
     for (int i=0; i<ntot; i++){
         for (int j=4*ntot; j<5*ntot; j++){
             aa(i,j) = aa(i,j) - ntot0;
-        } 
-    }    
-    
+        }
+    }
+
     int jj=0;
     double pact1 = 0;
     double apar0 = 0;
@@ -203,17 +203,17 @@ Rcpp::List SRM_RCPP_SRM_ARBSRM_ONE_GROUP_ESTIMATE( Rcpp::NumericMatrix data,
                 if (inde(i,1)==inde(j,1)){
                     vv(i,jj) = 1;
                     aa(i,j) = pact1;
-                } 
+                }
                 if (inde(i,0)==inde(j,1)){
                     vv(i,(ntot2+j)) = 1;
                 }
                 if (inde(i,1)==inde(j,0)){
                     vv(i,(ntot3+j)) = 1;
                 }
-            } 
+            }
         }
-    }    
-    
+    }
+
     mirr = SRM_RCPP_ROWSUMS(recip);
     double mirr_i0a = 0;
     double mirr_i0b = 0;
@@ -222,13 +222,13 @@ Rcpp::List SRM_RCPP_SRM_ARBSRM_ONE_GROUP_ESTIMATE( Rcpp::NumericMatrix data,
     for (int j=0; j<ntot; j++){
         mirr_j1[j] = (mirr(inde(j,0))-1)/mirr(inde(j,0));
         mirr_j2[j] = -1/mirr(inde(j,0));
-    }    
+    }
     for (int i=0; i<ntot; i++){
         mirr_i0a = -1/mirr(inde(i,0));
         mirr_i0b = (mirr(inde(i,0))-1)/mirr(inde(i,0));
         for (int j=0; j<ntot; j++){
             if ((recip(inde(i,0),inde(i,1))!=0) & (recip(inde(j,0),inde(j,1))!=0)){
-                if ((inde(i,0)==inde(j,1)) & (inde(i,1)==inde(j,0))){ 
+                if ((inde(i,0)==inde(j,1)) & (inde(i,1)==inde(j,0))){
                     aa(i,(ntot3+j)) = mirr_i0b;
                     aa(i,(ntot2+j)) = mirr_j1[j];
                 }
@@ -238,7 +238,7 @@ Rcpp::List SRM_RCPP_SRM_ARBSRM_ONE_GROUP_ESTIMATE( Rcpp::NumericMatrix data,
                 if ((inde(i,0)==inde(j,1)) & (inde(i,1)!=inde(j,0))){
                     aa(i,(ntot3+j)) = mirr_i0a;
                 }
-            } 
+            }
         }
     }
 
@@ -246,7 +246,7 @@ Rcpp::List SRM_RCPP_SRM_ARBSRM_ONE_GROUP_ESTIMATE( Rcpp::NumericMatrix data,
     for (int hh=0; hh<ntot; hh++){
         uvv(_,hh) = vv(_,hh+ntot2) + vv(_,hh+ntot3);
     }
-    
+
     arma::mat ss = arma::zeros(6,3);
     arma::mat c = arma::zeros(6,6);
 
@@ -256,25 +256,25 @@ Rcpp::List SRM_RCPP_SRM_ARBSRM_ONE_GROUP_ESTIMATE( Rcpp::NumericMatrix data,
     Rcpp::NumericMatrix vv1(ntot,ntot);
     int ttt=0;
     int uuu=0;
-    for (int i=0; i<6; i++){        
+    for (int i=0; i<6; i++){
         for (int j=0; j<6; j++){
             ttt = i*ntot;
             uuu = j*ntot;
-            for (int cc=0; cc<ntot; cc++){                    
-                aa1(_,cc) = aa(_,cc+ttt);                                    
+            for (int cc=0; cc<ntot; cc++){
+                aa1(_,cc) = aa(_,cc+ttt);
                 vv1(_,cc) = vv(_,cc+uuu);
             }
-            if ((i<2) | (i>3)){                
+            if ((i<2) | (i>3)){
                 c(i,j) = SRM_ARBSRM_TRACE_PRODUCT_MATRIX(aa1,vv1);
             }
             if ((i==2) | (i==3)){
                 c(i,j) = SRM_ARBSRM_TRACE_PRODUCT_MATRIX_TRANSPOSE(aa1, vv1);
-            }        
+            }
         }
-    }    
-    
+    }
+
     arma::mat cin = arma::pinv(c);
-    double tmp1 = 0;    
+    double tmp1 = 0;
     for (int i=0; i<6; i++){
         ttt = i*ntot;
         for (int hh=0; hh<ntot; hh++){
@@ -286,17 +286,17 @@ Rcpp::List SRM_RCPP_SRM_ARBSRM_ONE_GROUP_ESTIMATE( Rcpp::NumericMatrix data,
                     if (bivariate){
                         // ss[i,2] <- t(dv[(ntot+1):(2*ntot)])%*%aa[,dumi]%*%dv[(ntot+1):(2*ntot)]
                         ss(i,1) += dv[hh+ntot]*tmp1*dv[kk+ntot];
-                        // ss[i,3]<-t(dv[1:ntot])%*%aa[,dumi]%*%dv[(ntot+1):(2*ntot)] 
+                        // ss[i,3]<-t(dv[1:ntot])%*%aa[,dumi]%*%dv[(ntot+1):(2*ntot)]
                         ss(i,2) += dv[hh]*tmp1*dv[kk+ntot];
                     }
                 }
             }
         }
     }
-        
+
     //- point estimate
     arma::mat est = arma::mat(cin*ss);
-    
+
     //--- OUTPUT:
     return Rcpp::List::create(
             Rcpp::Named("dv") = dv,
@@ -334,7 +334,7 @@ double SRM_RCPP_MATRIX_TRACE_PRODUCT(Rcpp::NumericMatrix x, Rcpp::NumericMatrix 
         for (int pp=0; pp<p; pp++){
             tot += x(nn,pp)*y(pp,nn);
         }
-    }    
+    }
     //--- OUTPUT:
     return tot;
 }
@@ -349,16 +349,16 @@ Rcpp::NumericMatrix SRM_RCPP_SRM_MATRIX_MULT_LOGICAL(Rcpp::NumericMatrix x, Rcpp
     int xc = x.ncol();
     int yc = y.ncol();
     Rcpp::NumericMatrix z(xr,yc);
-    
+
     for (int hh=0; hh<xc; hh++){
         for (int cc=0; cc<yc; cc++){
             if (y(hh,cc)){
-                for (int rr=0; rr<xr; rr++){        
+                for (int rr=0; rr<xr; rr++){
                     z(rr,cc) += x(rr,hh);
                 }
             }
         }
-    }    
+    }
     //--- OUTPUT:
     return z;
 }
@@ -375,26 +375,26 @@ Rcpp::NumericMatrix SRM_RCPP_SRM_ARBSRM_SE_CREATE_CWU(int NF)
     int j = 0;
     int nh=0;
     for (int h=0; h<4; h++){
-        if (h==0){ 
-            // foo = {0,6,12,18,24,30}; 
+        if (h==0){
+            // foo = {0,6,12,18,24,30};
             nh = 6;
             foo[0] = 0;
-            foo[1] = 6;            
+            foo[1] = 6;
             foo[2] = 12;
             foo[3] = 18;
-            foo[4] = 24;            
-            foo[5] = 30;            
+            foo[4] = 24;
+            foo[5] = 30;
         }
-        if (h==1){ 
-            // foo = {36,42,48,54,60}; 
+        if (h==1){
+            // foo = {36,42,48,54,60};
             nh = 5;
             foo[0] = 36;
-            foo[1] = 42;            
-            foo[2] = 48;        
-            foo[3] = 54;            
-            foo[4] = 60;            
+            foo[1] = 42;
+            foo[2] = 48;
+            foo[3] = 54;
+            foo[4] = 60;
         }
-        if (h==2){ 
+        if (h==2){
             // foo = {66,72,78,84};
             nh = 4;
             foo[0] = 66;
@@ -402,14 +402,14 @@ Rcpp::NumericMatrix SRM_RCPP_SRM_ARBSRM_SE_CREATE_CWU(int NF)
             foo[2] = 78;
             foo[3] = 84;
         }
-        if (h==3){ 
-            // foo = {90,96,102}; 
+        if (h==3){
+            // foo = {90,96,102};
             nh = 3;
             foo[0] = 90;
             foo[1] = 96;
             foo[2] = 102;
         }
-        j = h;        
+        j = h;
         for (int i=0; i<nh; i++){
             cwu(h,j) = foo[i];
             cwu(j,h) = foo[i];
@@ -420,11 +420,11 @@ Rcpp::NumericMatrix SRM_RCPP_SRM_ARBSRM_SE_CREATE_CWU(int NF)
     cwu(5,4) = 114;
     cwu(4,5) = 114;
     cwu(5,5) = 120;
-    
+
     //--- OUTPUT:
     return cwu;
 }
 ///********************************************************************
 
 
-// Rcpp::Rcout << "j1=" << j1 << " j2=" << j2 << " w1=" << w1 << std::endl;                
+// Rcpp::Rcout << "j1=" << j1 << " j2=" << j2 << " w1=" << w1 << std::endl;

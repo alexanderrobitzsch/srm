@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • srm</title>
+<title>Dataset Back et al. (2011) — data.back • srm</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,7 +30,10 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Dataset Back et al. (2011) — data.back" />
+
+<meta property="og:description" content="Dataset used in Back, Schmukle and Egloff (2011)." />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -47,7 +50,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -94,72 +97,61 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Dataset Back et al. (2011)</h1>
+    
+    <div class="hidden name"><code>data.back.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    
+    <p>Dataset used in Back, Schmukle and Egloff (2011).</p>
+    
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>data.back</span>)</pre>
+        
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="data.back.html">data.back</a></code> </p>
-        </td>
-        <td><p>Dataset Back et al. (2011)</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="data.bm.html">data.bm1</a></code> <code><a href="data.bm.html">data.bm2</a></code> </p>
-        </td>
-        <td><p>Dataset Bond and Malloy (2018)</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="data.srm.html">data.srm01</a></code> </p>
-        </td>
-        <td><p>Example Datasets for the <span class="pkg">srm</span> Package</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="srm-package.html">srm-package</a></code> </p>
-        </td>
-        <td><p>Structural Equation Modeling for the Social Relations Model</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="srm.html">srm()</a></code> <code><a href="srm.html">coef(<i>&lt;srm&gt;</i>)</a></code> <code><a href="srm.html">vcov(<i>&lt;srm&gt;</i>)</a></code> <code><a href="srm.html">summary(<i>&lt;srm&gt;</i>)</a></code> <code><a href="srm.html">logLik(<i>&lt;srm&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Structural Equation Model for the Social Relations Model</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="srm_arbsrm.html">srm_arbsrm()</a></code> <code><a href="srm_arbsrm.html">coef(<i>&lt;srm_arbsrm&gt;</i>)</a></code> <code><a href="srm_arbsrm.html">summary(<i>&lt;srm_arbsrm&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Least Squares Estimation of the Social Relations Model (Bond &amp; Malloy, 2018)</p></td>
-      </tr>
-    </tbody>
-    </table>
+    <ul>
+<li><p>The dataset <code>data.back</code> is a round-robin desiogn with 54 units and
+has the following structure</p>
+<p><code>'data.frame':   2862 obs. of  8 variables:</code> <br />
+<code> $ Group  : num  1 1 1 1 1 1 1 1 1 1 ...</code> <br />
+<code> $ Actor  : int  1 1 1 1 1 1 1 1 1 1 ...</code> <br />
+<code> $ Partner: int  2 3 4 5 6 7 8 9 10 11 ...</code> <br />
+<code> $ Dyad   : int  1 2 3 4 5 6 7 8 9 10 ...</code> <br />
+<code> $ y      : int  3 3 2 2 4 3 3 2 3 3 ...</code> <br />
+<code> $ sex    : int  1 1 1 1 1 1 1 1 1 1 ...</code> <br />
+<code> $ age    : int  22 22 22 22 22 22 22 22 22 22 ...</code> <br />
+<code> $ n      : num  -1.17 -1.17 -1.17 -1.17 -1.17 -1.17 -1.17 -1.17 -1.17 -1.17 ...</code> <br /></p></li>
+</ul>
+    
+    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
+
+    <p><a href='https://osf.io/ud2sv/'>https://osf.io/ud2sv/</a></p>
+    
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p>Back, M. D., Schmukle, S. C., &amp; Egloff, B. (2011). A closer look at first sight: Social
+relations lens model analysis of personality and interpersonal attraction at zero
+acquaintance. <em>European Journal of Personality, 25</em>(3), 225-238.
+doi: <a href='http://doi.org/10.1002/per.790'>10.1002/per.790</a></p>
+    
+
   </div>
-
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
-    </ul>
+      
+      <li><a href="#format">Format</a></li>
+
+      <li><a href="#source">Source</a></li>
+
+      <li><a href="#references">References</a></li>
+          </ul>
+
   </div>
 </div>
 

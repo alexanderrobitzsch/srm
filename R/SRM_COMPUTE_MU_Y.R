@@ -1,5 +1,5 @@
 ## File Name: SRM_COMPUTE_MU_Y.R
-## File Version: 0.02
+## File Version: 0.03
 
 SRM_COMPUTE_MU_Y <- function(parm_list, y, Xs, group)
 {
@@ -9,7 +9,7 @@ SRM_COMPUTE_MU_Y <- function(parm_list, y, Xs, group)
     # include structure for latent means
     muy <- as.vector(Xs %*% BETA)
     ey <- y - muy
-    
+
     #-- output
     res <- list(muy=muy, ey=ey)
     return(res)

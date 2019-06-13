@@ -1,5 +1,5 @@
 ## File Name: summary.srm.R
-## File Version: 0.194
+## File Version: 0.195
 
 
 summary.srm <- function(object, digits=3, file=NULL, ...)
@@ -9,29 +9,29 @@ summary.srm <- function(object, digits=3, file=NULL, ...)
 
     #- print call
     SRM_SUMMARY_PRINT_CALL(object=object)
-    
+
     #* R session info
     SRM_SUMMARY_PACKAGE_VERSIONS(object=object)
-    
-    #* print informations about computation time    
+
+    #* print informations about computation time
     parm.table <- object$parm.table
     cat("\nDate of analysis:", paste(object$time_start),"\n")
     cat("Time pre-processing: "); print(object$time$time_pre)
     cat("Time estimation: "); print(object$time$time_opt)
     cat("Time post-processing: "); print(object$time$time_post)
-        
+
     #* information about estimation
     cat("\nINFORMATIONS ABOUT ESTIMATION\n\n")
     cat("Log-likelihood","=", round(object$loglike, digits),"\n")
     cat("Deviance","=", round(object$dev, digits),"\n")
-    cat("Number of estimated parameters","=", attr(parm.table, "npar"), "\n")    
+    cat("Number of estimated parameters","=", attr(parm.table, "npar"), "\n")
     res_opt <- object$res_opt
     cat("Converged","=", res_opt$converged, "\n")
     cat("Number of iterations","=", res_opt$iter, "\n")
     cat("optimizer","=", res_opt$optimizer, "\n")
     cat("Optimization function","=", res_opt$opt_label, "\n")
     cat("Maximum absolute value of relative gradient", "=", object$grad_maxabs, "\n")
-    
+
     #* display parameter table
     cat("\nESTIMATED PARAMETERS\n\n")
     # select columns
@@ -41,7 +41,7 @@ summary.srm <- function(object, digits=3, file=NULL, ...)
     round_vars <- c("est","se")
     obji[,round_vars] <- round( obji[,round_vars], digits)
     print(obji)
-    
+
     #* close sink
-    if (!is.null(file)) { sink() }        
+    if (!is.null(file)) { sink() }
 }

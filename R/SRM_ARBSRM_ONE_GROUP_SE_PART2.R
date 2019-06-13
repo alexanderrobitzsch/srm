@@ -1,5 +1,5 @@
 ## File Name: SRM_ARBSRM_ONE_GROUP_SE_PART2.R
-## File Version: 0.18
+## File Version: 0.19
 
 SRM_ARBSRM_ONE_GROUP_SE_PART2 <- function(cin, w, uw, est)
 {
@@ -9,16 +9,16 @@ SRM_ARBSRM_ONE_GROUP_SE_PART2 <- function(cin, w, uw, est)
         dum <- ((j1-1)*6+1):(j1*6)
         # Searle, Casella, & McCullough, Equation 21, page 176
         var <- SRM_MATRIX_TRIPLE_PRODUCT(x=cin, y=w[,dum])
-        r1 <- 0                
+        r1 <- 0
         for (i1 in 1:6){
             for (i2 in i1:6) {
                 r1 <- r1+1
-                b[r1,j1] <- var[i1,i2] 
-            } 
+                b[r1,j1] <- var[i1,i2]
+            }
         }
         if (j1<22){
             r2 <- 21
-            var <- SRM_MATRIX_TRIPLE_PRODUCT(x=cin, y=uw[,dum])            
+            var <- SRM_MATRIX_TRIPLE_PRODUCT(x=cin, y=uw[,dum])
             for (i1 in 1:5) {
                 ii1 <- i1
                 if (i1>3) ii1=i1+1
@@ -31,8 +31,8 @@ SRM_ARBSRM_ONE_GROUP_SE_PART2 <- function(cin, w, uw, est)
                     if (i2==3) bare <- (var[ii1,3]+var[ii1,4])/2
                     if ((i1==3) & (i2==3))
                     bare <- (var[3,3]+var[3,4]+var[4,3]+var[4,4])/4
-                    b[r2,j1] <- bare 
-                } 
+                    b[r2,j1] <- bare
+                }
             } # b gives exact vars and covs    # among parameter estimates
         }
     }
@@ -61,7 +61,7 @@ SRM_ARBSRM_ONE_GROUP_SE_PART2 <- function(cin, w, uw, est)
         if (kk==2) matrx <- SRM_OUTER(yvec, yvec)
         if (kk==3) matrx <- SRM_OUTER(yvec, xvec)
         estp[22:46] <- c(matrx)
-        oot[,kk] <- bb %*% estp 
+        oot[,kk] <- bb %*% estp
     }
     se <- oot^.5
     #-- output

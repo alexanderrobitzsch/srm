@@ -1,5 +1,5 @@
 %% File Name: data.srm.Rd
-%% File Version: 0.04
+%% File Version: 0.05
 
 \name{data.srm}
 \alias{data.srm}
@@ -48,4 +48,4 @@ groups with 10 members each.
 %data(data.srm01)
 %## maybe str(data.srm01) ; plot(data.srm01) ...
 %}
-\keyword{datasets}
+%% \keyword{datasets}

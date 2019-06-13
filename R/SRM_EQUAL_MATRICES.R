@@ -1,5 +1,5 @@
 ## File Name: SRM_EQUAL_MATRICES.R
-## File Version: 0.02
+## File Version: 0.03
 
 SRM_EQUAL_MATRICES <- function(x1, x2, elim=NULL)
 {
@@ -8,7 +8,7 @@ SRM_EQUAL_MATRICES <- function(x1, x2, elim=NULL)
         x2 <- x2[ , -elim, drop=FALSE]
     }
     if (nrow(x1) != nrow(x2) ){
-        val <- FALSE    
+        val <- FALSE
     } else {
         val <- ! any(x1 != x2)
     }

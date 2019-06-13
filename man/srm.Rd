@@ -1,5 +1,5 @@
 %% File Name: srm.Rd
-%% File Version: 0.154
+%% File Version: 0.157
 
 \name{srm}
 \alias{srm}
@@ -10,7 +10,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 
 \title{
-Structural Equation Model for the Social Relations Model 
+Structural Equation Model for the Social Relations Model
 }
 
 \description{
@@ -22,12 +22,12 @@ Nestler, 2018).
 
 
 \usage{
-srm(model.syntax = NULL, data = NULL, group.var = NULL, rrgroup_name = NULL, 
-  person_names = c("Actor", "Partner"), fixed.groups = FALSE, var_positive = -1, 
-  optimizer = "srm", maxiter = 300, conv_dev = 1e-08, conv_par = 1e-06, 
-  do_line_search = TRUE, line_search_iter_max = 6, verbose = TRUE, use_rcpp = TRUE, 
-  shortcut = TRUE)
-  
+srm(model.syntax = NULL, data = NULL, group.var = NULL, rrgroup_name = NULL,
+  person_names = c("Actor", "Partner"), fixed.groups = FALSE, var_positive = -1,
+  optimizer = "srm", maxiter = 300, conv_dev = 1e-08, conv_par = 1e-06,
+  do_line_search = TRUE, line_search_iter_max = 6, verbose = TRUE, use_rcpp = TRUE,
+  shortcut = TRUE, use_woodbury = TRUE)
+
 \method{coef}{srm}(object, ...)
 \method{vcov}{srm}(object, ...)
 \method{summary}{srm}(object, digits=3, file=NULL, ...)
@@ -40,7 +40,7 @@ Syntax similar to \pkg{lavaan} language, see Examples.
 }
   \item{data}{
 Data frame containing round robin identifier variables and variables in the
-round robin design 
+round robin design
 }
   \item{group.var}{
 Name of grouping variable
@@ -58,7 +58,7 @@ Logical indicating whether groups should be handled with fixed effects
 Nonnegative value if variances are constrained to be positive
 }
   \item{optimizer}{
-Optimizer to be used: \code{"srm"} for internal optimization using 
+Optimizer to be used: \code{"srm"} for internal optimization using
 Fisher scoring and \code{"nlminb"} for L-FBGS optimization.
 }
   \item{maxiter}{
@@ -83,9 +83,11 @@ Logical indicating whether convergence progress should be displayed
 Logical indicating whether \pkg{Rcpp} package should be used
 }
   \item{shortcut}{
-Logical indicating whether shortcuts for round robin groups with 
+Logical indicating whether shortcuts for round robin groups with
 same structure should be used
 }
+\item{use_woodbury}{Logical indicating whether matrix inversion should
+be simplified by Woodbury identity}
 \item{object}{Object of class \code{srm}}
 \item{file}{Optional file name for summary output}
 \item{digits}{Number of digits after decimal in summary output}
@@ -108,17 +110,17 @@ List with following entries (selection)
 }
 
 \references{
-Gill, P. S., & Swartz, T. B. (2001). Statistical analyses for round robin interaction 
+Gill, P. S., & Swartz, T. B. (2001). Statistical analyses for round robin interaction
 data. \emph{Canadian Journal of Statistics, 29}(2), 321-331.
 \doi{10.2307/3316080}
 
-Nestler, S. (2018). Likelihood estimation of the multivariate social relations model. 
+Nestler, S. (2018). Likelihood estimation of the multivariate social relations model.
 \emph{Journal of Educational and Behavioral Statistics, 43}(4), 387-406.
 \doi{10.3102/1076998617741106}
 
 Warner, R. M., Kenny, D. A., & Soto, M. (1979). A new round robin analysis of variance for
-social interaction data. \emph{Journal of Personality and Social Psychology, 37}, 
-1742-1757. \doi{10.1037/0022-3514.37.10.1742} 
+social interaction data. \emph{Journal of Personality and Social Psychology, 37},
+1742-1757. \doi{10.1037/0022-3514.37.10.1742}
 }
 
 %\author{
@@ -196,7 +198,7 @@ Wert2@PA ~~ 0*Wert2@PA
 '
 
 #-- estimate model
-mod1 <- srm(mf, data = dat, rrgroup_name="Group", conv_par=1e-4, maxiter=20)
+mod1 <- srm::srm(mf, data = dat, rrgroup_name="Group", conv_par=1e-4, maxiter=20)
 summary(mod1)
 
 #############################################################################
@@ -214,7 +216,7 @@ f1@A=~Wert1@A+Wert2@A+Wert3@A
 f1@P=~Wert1@P+Wert2@P+Wert3@P
 
 \%Dyad
-f1@AP=~Wert1@AP+Wert2@AP+Wert3@AP    
+f1@AP=~Wert1@AP+Wert2@AP+Wert3@AP
 
 # define some constraints
 Wert1@AP ~~ 0*Wert1@PA

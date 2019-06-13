@@ -1,10 +1,10 @@
 ## File Name: SRM_PARTABLE_MAKE.R
-## File Version: 0.22
+## File Version: 0.233
 
 SRM_PARTABLE_MAKE <- function(model.syntax = '',
-                              ngroups = 1L, 
-                              as.a.data.frame = TRUE,
-                              add.attributes = TRUE, data_colnames=NULL)  {
+            ngroups = 1L, as.a.data.frame = TRUE,
+            add.attributes = TRUE, data_colnames=NULL, method="ml")
+{
 
     # Prepare the model syntax for parsing
     model <- SRM_PARSER_PREPARE(model.syntax)
@@ -37,7 +37,7 @@ SRM_PARTABLE_MAKE <- function(model.syntax = '',
 
     pers.table <- SRM_PARTABLE_PERSON(pers.list,as.a.data.frame=as.a.data.frame,ngroups = ngroups)
     dyad.table <- SRM_PARTABLE_DYAD(dyad.list,as.a.data.frame=as.a.data.frame,ngroups = ngroups)
-    
+
     # Now, we construct the final table, that contains the names of the matrices
     # and the position of the to-be estimated parameters
 
@@ -45,31 +45,31 @@ SRM_PARTABLE_MAKE <- function(model.syntax = '',
                                           add.attributes = add.attributes,
                                           as.a.data.frame = as.a.data.frame,
                                           ngroups = ngroups)
-    
+
     dyad.matrix <- SRM_PARTABLE_TO_MATRIX(dyad.table, name = "Dyad",
                                              add.attributes = add.attributes,
                                              as.a.data.frame = as.a.data.frame,
                                              ngroups = ngroups)
-    
+
     # We combine the Person-Table and the Dyad-Table and add start values
-    srm_partable <- rbind(pers.matrix,dyad.matrix)    
+    srm_partable <- rbind(pers.matrix,dyad.matrix)
     srm_partable <- SRM_STARTVALUES(srm_partable,method.startvalues = "default")
-    
+
     # Ok, some final edits (add a id-column)
-    srm_partable <- SRM_IDVARIABLE(srm_partable)
+    srm_partable <- SRM_IDVARIABLE(TABLE=srm_partable, method=method)
 
     # include level
     l1 <- strsplit( srm_partable$mat, split="_" )
     srm_partable$level <- unlist(lapply( l1, FUN = function(ll){ ll[2] } ) )
     srm_partable$level[ srm_partable$mat == "BETA" ] <- "U"
-    
+
     # include variable which indicates unique parameters
     srm_partable$unid <- srm_partable$index
     srm_partable$unid[ is.na(srm_partable$unid) ] <- 0
     srm_partable$unid[ duplicated(srm_partable$unid) ] <- 0
     npar <- max(srm_partable$index, na.rm=TRUE)
     ind <- match(seq_len(npar), srm_partable$unid)
-    
+
     # add the attributes
     if(add.attributes) {
         attr(srm_partable, "mmNames")  <- c(attr(pers.matrix, "mmNames"),
@@ -87,11 +87,11 @@ SRM_PARTABLE_MAKE <- function(model.syntax = '',
     par_names <- paste0(srm_partable$lhs, srm_partable$op, srm_partable$rhs)
     srm_partable$par_names <- par_names
     srm_partable[ srm_partable$unid == 0, "par_names"] <- ""
-    
+
     srm_par1 <- srm_partable[ srm_partable$unid > 0 , ]
     srm_par1 <- srm_par1[ order(srm_par1$unid), ]
     attr(srm_partable, "par_names") <- srm_par1$par_names
-    
+
     #- variable names
     var_names <- unique(c(paste(srm_partable$lhs), paste(srm_partable$rhs)))
     subs <- c("@AP", "@PA", "@A","@P")
@@ -100,7 +100,7 @@ SRM_PARTABLE_MAKE <- function(model.syntax = '',
     }
     var_names <- intersect( data_colnames, unique(var_names) )
     attr(srm_partable, "var_names") <- var_names
-    
-    rownames(srm_partable) <- NULL                                              
-    return(srm_partable)         
+
+    rownames(srm_partable) <- NULL
+    return(srm_partable)
 }

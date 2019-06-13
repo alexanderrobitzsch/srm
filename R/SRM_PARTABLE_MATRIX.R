@@ -1,5 +1,5 @@
 ## File Name: SRM_PARTABLE_MATRIX.R
-## File Version: 0.06
+## File Version: 0.07
 
 ## functions to compute the matrix representation
 ## overall function that is called in SRM_AUFRUF
@@ -46,11 +46,11 @@ SRM_PARTABLE_TO_MATRIX_PERSON <- function(srmpartable = NULL,
                                           target   = NULL,
                                           extra    = FALSE,
                                           ngroups  = 1L) {
-    
-    
+
+
     # prepare target list
     if(is.null(target)) target <- srmpartable
-    
+
     # prepare output
     N <- length(target$lhs)
     tmp.mat <- character(N)
@@ -61,7 +61,7 @@ SRM_PARTABLE_TO_MATRIX_PERSON <- function(srmpartable = NULL,
     # meanstructure <- any(srmpartable$op == "~1")
     # categorical   <- any(partable$op == "|")
 
-    if(any(srmpartable$op == "~" & grepl("@E",srmpartable$rhs))) { 
+    if(any(srmpartable$op == "~" & grepl("@E",srmpartable$rhs))) {
       Gamma <- TRUE
     } else { Gamma <- FALSE }
 
@@ -73,43 +73,43 @@ SRM_PARTABLE_TO_MATRIX_PERSON <- function(srmpartable = NULL,
     }
 
     for(g in 1:ngroups) {
-    
+
         # ++++++++++++++++++++++++++++++++
         #   get information per group
-        # +++++++++++++++++++++++++++++++ 
+        # +++++++++++++++++++++++++++++++
 
         tmp.srmpartable <- subset(srmpartable,srmpartable$group == g)
-        
+
         # ++++++++++++++++++++++++++++++++
         #  info from user model per block
         # ++++++++++++++++++++++++++++++++
 
-        # IMPOTRANT: Because srmpartable contains defaults values for 
-        #            single-indicator rs, the results are different for 
+        # IMPOTRANT: Because srmpartable contains defaults values for
+        #            single-indicator rs, the results are different for
         #            srmpartable compared to PARLIST
-        
+
         # latent actor- and partner-rrs
-        rr.lv.names.a <- SRM_PARTABLE_VNAMES_PERSON(tmp.srmpartable, type="rr.lv.a") 
-        rr.lv.names.p <- SRM_PARTABLE_VNAMES_PERSON(tmp.srmpartable, type="rr.lv.p")  
+        rr.lv.names.a <- SRM_PARTABLE_VNAMES_PERSON(tmp.srmpartable, type="rr.lv.a")
+        rr.lv.names.p <- SRM_PARTABLE_VNAMES_PERSON(tmp.srmpartable, type="rr.lv.p")
         #rr.latents <- sort(c(rr.lv.names.a,rr.lv.names.p))
         rr.latents <- c(rr.lv.names.a,rr.lv.names.p)
         rr.nfac = length(rr.latents)
-   
+
         # observed rrs that are indicators of the rr-lvs
         rr.ov.ind.names.a <- SRM_PARTABLE_VNAMES_PERSON(tmp.srmpartable, type="rr.ov.ind.a")
         rr.ov.ind.names.p <- SRM_PARTABLE_VNAMES_PERSON(tmp.srmpartable, type="rr.ov.ind.p")
-        #rr.ov.inds <- sort(c(rr.ov.ind.names.a,rr.ov.ind.names.p)) 
+        #rr.ov.inds <- sort(c(rr.ov.ind.names.a,rr.ov.ind.names.p))
         rr.ov.inds <- c(rr.ov.ind.names.a,rr.ov.ind.names.p)
         rr.true.ov.inds <- setdiff(rr.ov.inds,rr.latents) # exclude false ovs
-        
+
         # if there is only one indicator per factor, then this is a special kind of
         # latent variable
-        rr.true.latents <- setdiff(rr.latents,rr.ov.inds) 
-        
-        # true exogenuous covariates 
-        sv.eqs.x <- SRM_PARTABLE_VNAMES_PERSON(tmp.srmpartable, type="sv.eqs.x")     
+        rr.true.latents <- setdiff(rr.latents,rr.ov.inds)
+
+        # true exogenuous covariates
+        sv.eqs.x <- SRM_PARTABLE_VNAMES_PERSON(tmp.srmpartable, type="sv.eqs.x")
         #sv.eqs.y <- SRM_PARTABLE_VNAMES_PERSON(PARLIST, type="sv.eqs.y")
-        
+
         # ++++++++++++++++++++++++++++++++++
         #    now we build the matrices
         # ++++++++++++++++++++++++++++++++++
@@ -118,23 +118,23 @@ SRM_PARTABLE_TO_MATRIX_PERSON <- function(srmpartable = NULL,
         idx <- which(target$group == g &
                      target$op == "=~")
         tmp.mat[idx] <- "LAM_U"
-        tmp.row[idx] <- match(target$rhs[idx],rr.ov.inds) 
+        tmp.row[idx] <- match(target$rhs[idx],rr.ov.inds)
         tmp.col[idx] <- match(target$lhs[idx],rr.latents)
         ncol_LAM_U <- rr.nfac
         nrow_LAM_U <- length(rr.ov.inds)
-        
+
         # 2. "~" regressions by rr-variables and exogenous covariates
         if(Gamma) {
-            # GAM_U 
+            # GAM_U
             idx <- which(target$group == g  &
                          target$rhs %in% sv.eqs.x &
-                         target$op == "~") 
+                         target$op == "~")
             tmp.mat[idx] <- "G_U"
             tmp.row[idx] <- match(target$lhs[idx],rr.latents)
             tmp.col[idx] <- match(target$rhs[idx],sv.eqs.x)
             ncol_G_U <- length(sv.eqs.x)
             nrow_G_U <- rr.nfac
-                                  
+
             # B_U
             idx <- which(!(target$rhs %in% sv.eqs.x) &
                            target$group == g &
@@ -144,7 +144,7 @@ SRM_PARTABLE_TO_MATRIX_PERSON <- function(srmpartable = NULL,
             tmp.col[idx] <- match(target$rhs[idx],rr.latents)
             ncol_B_U <- rr.nfac
             nrow_B_U <- rr.nfac
-        
+
         } else {
             # just B_U
             idx <- which(target$group == g &
@@ -154,7 +154,7 @@ SRM_PARTABLE_TO_MATRIX_PERSON <- function(srmpartable = NULL,
             tmp.col[idx] <- match(target$rhs[idx],rr.latents)
             ncol_B_U <- rr.nfac
             nrow_B_U <- rr.nfac
-            
+
             ncol_G_U <- 0
             nrow_G_U <- 0
         }
@@ -185,9 +185,9 @@ SRM_PARTABLE_TO_MATRIX_PERSON <- function(srmpartable = NULL,
         # 4. means and Intercepts
         # 4a. "~1" ov
         idx <- which(target$group == g &
-                     target$op == "~1" & 
+                     target$op == "~1" &
                      !(target$lhs %in% rr.true.latents))
-        
+
         tmp.mat[idx] <- "BETA"
         tmp.row[idx] <- match(target$lhs[idx], rr.ov.ind.names.a)
         tmp.col[idx] <- 1L
@@ -195,11 +195,11 @@ SRM_PARTABLE_TO_MATRIX_PERSON <- function(srmpartable = NULL,
 
         # 4b. "~1" lv
         idx <- which(target$group == g &
-                     target$op == "~1" & 
+                     target$op == "~1" &
                      target$lhs %in% rr.true.latents)
         tmp.mat[idx] <- "MU_U"
         tmp.row[idx] <- match(target$lhs[idx], rr.latents)
-        tmp.col[idx] <- 1L 
+        tmp.col[idx] <- 1L
         nrow_MU_U <- length(idx)
 
         if(extra) {
@@ -232,7 +232,7 @@ SRM_PARTABLE_TO_MATRIX_PERSON <- function(srmpartable = NULL,
 
             IDX <- which(target$group == g)
             mmNames <- character()
-            
+
             if("LAM_U" %in% tmp.mat[IDX]) {
                 mmNames <- c(mmNames, "LAM_U")
             }
@@ -307,35 +307,35 @@ SRM_PARTABLE_TO_MATRIX_DYAD <- function(srmpartable = NULL,
 
         # ++++++++++++++++++++++++++++++++
         #   get information per group
-        # +++++++++++++++++++++++++++++++ 
+        # +++++++++++++++++++++++++++++++
 
         tmp.srmpartable <- subset(srmpartable,srmpartable$group == g)
         tmp.srmpartable$group = 1
-        
+
         # ++++++++++++++++++++++++++++++++
         #  info from user model per block
         # ++++++++++++++++++++++++++++++++
 
-        # IMPOTRANT: Because srmpartable contains defaults values for 
-        #            single-indicator rs, the results are different for 
+        # IMPOTRANT: Because srmpartable contains defaults values for
+        #            single-indicator rs, the results are different for
         #            srmpartable compared to PARLIST
-        
+
         # latent actor- and partner-rrs
-        rr.lv.names.ij <- SRM_PARTABLE_VNAMES_DYAD(tmp.srmpartable, type="rr.lv.ij") 
-        rr.lv.names.ji <- SRM_PARTABLE_VNAMES_DYAD(tmp.srmpartable, type="rr.lv.ji")  
+        rr.lv.names.ij <- SRM_PARTABLE_VNAMES_DYAD(tmp.srmpartable, type="rr.lv.ij")
+        rr.lv.names.ji <- SRM_PARTABLE_VNAMES_DYAD(tmp.srmpartable, type="rr.lv.ji")
         rr.latents <- sort(c(rr.lv.names.ij,rr.lv.names.ji))
         rr.nfac = length(rr.latents)
-   
+
         # observed rrs that are indicators of the rr-lvs
         rr.ov.ind.names.ij <- SRM_PARTABLE_VNAMES_DYAD(tmp.srmpartable, type="rr.ov.ind.ij")
         rr.ov.ind.names.ji <- SRM_PARTABLE_VNAMES_DYAD(tmp.srmpartable, type="rr.ov.ind.ji")
-        rr.ov.inds <- sort(c(rr.ov.ind.names.ij,rr.ov.ind.names.ji)) 
+        rr.ov.inds <- sort(c(rr.ov.ind.names.ij,rr.ov.ind.names.ji))
         rr.true.ov.inds <- setdiff(rr.ov.inds,rr.latents) # exclude false ovs
-        
-        # true exogenuous covariates 
-        sv.eqs.x <- SRM_PARTABLE_VNAMES_DYAD(tmp.srmpartable, type="sv.eqs.x")     
+
+        # true exogenuous covariates
+        sv.eqs.x <- SRM_PARTABLE_VNAMES_DYAD(tmp.srmpartable, type="sv.eqs.x")
         #sv.eqs.y <- SRM_PARTABLE_VNAMES_PERSON(PARLIST, type="sv.eqs.y")
-        
+
         # ++++++++++++++++++++++++++++++++++
         #    now we build the matrices
         # ++++++++++++++++++++++++++++++++++
@@ -344,23 +344,23 @@ SRM_PARTABLE_TO_MATRIX_DYAD <- function(srmpartable = NULL,
         idx <- which(target$group == g &
                      target$op == "=~")
         tmp.mat[idx] <- "LAM_D"
-        tmp.row[idx] <- match(target$rhs[idx],rr.ov.inds) 
+        tmp.row[idx] <- match(target$rhs[idx],rr.ov.inds)
         tmp.col[idx] <- match(target$lhs[idx],rr.latents)
         ncol_LAM_D <- rr.nfac
         nrow_LAM_D <- length(rr.ov.inds)
-        
+
         # 2. "~" regressions by rr-variables and exogenous covariates
         if(Gamma) {
-            # GAM_D 
+            # GAM_D
             idx <- which(target$group == g  &
                          target$rhs %in% sv.eqs.x &
-                         target$op == "~") 
+                         target$op == "~")
             tmp.mat[idx] <- "G_D"
             tmp.row[idx] <- match(target$lhs[idx],rr.latents)
             tmp.col[idx] <- match(target$rhs[idx],sv.eqs.x)
             ncol_G_D <- length(sv.eqs.x)
             nrow_G_D <- rr.nfac
-                                  
+
             # B_D
             idx <- which(!(target$rhs %in% sv.eqs.x) &
                            target$group == g &
@@ -370,7 +370,7 @@ SRM_PARTABLE_TO_MATRIX_DYAD <- function(srmpartable = NULL,
             tmp.col[idx] <- match(target$rhs[idx],rr.latents)
             ncol_B_D <- rr.nfac
             nrow_B_D <- rr.nfac
-        
+
         } else {
             # just B_D
             idx <- which(target$group == g &
@@ -380,7 +380,7 @@ SRM_PARTABLE_TO_MATRIX_DYAD <- function(srmpartable = NULL,
             tmp.col[idx] <- match(target$rhs[idx],rr.latents)
             ncol_B_D <- rr.nfac
             nrow_B_D <- rr.nfac
-            
+
             ncol_G_D <- 0
             nrow_G_D <- 0
         }
@@ -455,7 +455,7 @@ SRM_PARTABLE_TO_MATRIX_DYAD <- function(srmpartable = NULL,
             # new: 0.6 this block only!!
             IDX <- which(target$group == g)
             mmNames <- character()
-            
+
             if("LAM_D" %in% tmp.mat[IDX]) {
                 mmNames <- c(mmNames, "LAM_D")
             }

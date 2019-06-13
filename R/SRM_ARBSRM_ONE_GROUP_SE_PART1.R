@@ -1,5 +1,5 @@
 ## File Name: SRM_ARBSRM_ONE_GROUP_SE_PART1.R
-## File Version: 0.12
+## File Version: 0.13
 
 
 SRM_ARBSRM_ONE_GROUP_SE_PART1 <- function(vv, aa, uvv, ntot, j0, bivariate=TRUE)
@@ -8,7 +8,7 @@ SRM_ARBSRM_ONE_GROUP_SE_PART1 <- function(vv, aa, uvv, ntot, j0, bivariate=TRUE)
     uw <- matrix(0, nrow=6, ncol=126)
     cwu <- SRM_RCPP_SRM_ARBSRM_SE_CREATE_CWU(NF=6)
     v1 <- as.list(1:6)
-    garmat1_list <- list(v1, v1, v1, v1, v1, v1) 
+    garmat1_list <- list(v1, v1, v1, v1, v1, v1)
     garmat2_list <- garmat1_list
     garmat3_list <- garmat1_list
     tmp13_list <- tmp23_list <- as.list(1:6)
@@ -45,15 +45,15 @@ SRM_ARBSRM_ONE_GROUP_SE_PART1 <- function(vv, aa, uvv, ntot, j0, bivariate=TRUE)
     garmat2_trace <- garmat1_trace
     garmat3_trace <- garmat1_trace
     garmat23_trace <- garmat1_trace
-    
+
     # Here comes the time-consuming computation
-    for (i1 in 1:6){ 
+    for (i1 in 1:6){
         dumi1 <- dum_list[[i1]]
         w1=0
         for (j1 in 1:6){
             startw <- w1
             dumj1 <- dum_list[[j1]]
-            garmat1 <- garmat1_list[[i1]][[j1]]    
+            garmat1 <- garmat1_list[[i1]][[j1]]
             garmat2 <- garmat2_list[[i1]][[j1]]
             garmat3 <- garmat3_list[[i1]][[j1]]
             for (i2 in 1:6){
@@ -150,9 +150,9 @@ SRM_ARBSRM_ONE_GROUP_SE_PART1 <- function(vv, aa, uvv, ntot, j0, bivariate=TRUE)
                 } # end j2
             }  # end loop j1
         }  # end i2
-            
+
     } # End i2 and i1 loops and end time-consuming computation
-    
+
     #--- output
     res <- list(w=w, cwu=cwu, uw=uw)
     return(res)

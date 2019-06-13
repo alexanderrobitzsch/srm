@@ -1,5 +1,5 @@
 %% File Name: srm_arbsrm.Rd
-%% File Version: 0.22
+%% File Version: 0.23
 
 \name{srm_arbsrm}
 \alias{srm_arbsrm}
@@ -15,7 +15,7 @@ Least Squares Estimation of the Social Relations Model (Bond & Malloy, 2018)
 Provides least squares estimation of the bivariate social relations model
 with missing completely at random data (Bond & Malloy, 2018a). The code is
 basically taken from Bond and Malloy (2018b) and rewritten for
-reasons of computation time reduction.  
+reasons of computation time reduction.
 }
 
 \usage{
@@ -30,14 +30,14 @@ srm_arbsrm(data, serror = TRUE, use_srm = TRUE)
   \item{data}{
 Rectangular dataset currently containing only one round robin group.
 Bivariate observations are stacked one below the other (see
-example dataset \code{data.bm1}). 
+example dataset \code{data.bm1}).
 }
   \item{serror}{
 Logical indicating whether standard errors should be calculated.
 }
   \item{use_srm}{
 Logical indicating whether the rewritten code (\code{TRUE}) or the
-original code of Bond and Malloy (2018b) should be used. 
+original code of Bond and Malloy (2018b) should be used.
 }
 \item{object}{Object of class \code{srm_arbsrm}}
 \item{file}{Optional file name for summary output}
@@ -60,7 +60,7 @@ List containing entries
 
 \references{
 Bond, C. F., & Malloy, T. E. (2018a). Social relations analysis of dyadic data structure:
-The general case. In T. E. Malloy. 
+The general case. In T. E. Malloy.
 \emph{Social relations modeling of behavior in dyads and groups} (Ch. 14).
 Academic Press. \doi{10.1016/B978-0-12-811967-9.00014-X}
 
