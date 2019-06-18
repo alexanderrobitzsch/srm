@@ -1,5 +1,5 @@
 ## File Name: SRM_PARSER_FUNKTIONEN.R
-## File Version: 0.10
+## File Version: 0.12
 
 SRM_PARSER_PREPARE <- function(model.syntax='') {
 
@@ -16,7 +16,7 @@ SRM_PARSER_PREPARE <- function(model.syntax='') {
     model <- unlist( strsplit(model.syntax, "\n") )
 
     # bestimme die Positionen in der Liste, in denen Formeln stehen
-    # und merge multiline formulas; lösche dann alle Nullzeilen
+    # und merge multiline formulas; loesche dann alle Nullzeilen
     start.idx <- grep("[~=@%]", model)
     end.idx <- c( start.idx[-1]-1, length(model) )
     model.orig    <- model
@@ -445,9 +445,9 @@ SRM_PARSER_LIST <- function( model, ngroups = 1L, name="EMPTY" ) {
 
 SRM_PARSER_LIST_ADD_DYAD_FACTORS <- function( parlist ) {
 
-    # ergänzt in dyad-Liste AP-Faktoren bzw. PA-Faktoren
-    # Achtung: single-indicator Faktoren werden nicht ergänzt
-    # das mache ich später beim erstellen der default-parliste
+    # ergaenzt in dyad-Liste AP-Faktoren bzw. PA-Faktoren
+    # Achtung: single-indicator Faktoren werden nicht ergaenzt
+    # das mache ich spaeter beim erstellen der default-parliste
 
     idx.lv.ap <- which(parlist$op == "=~" & grepl("@AP",parlist$lhs))
     idx.lv.pa <- which(parlist$op == "=~" & grepl("@PA",parlist$lhs))
@@ -456,7 +456,7 @@ SRM_PARSER_LIST_ADD_DYAD_FACTORS <- function( parlist ) {
     vec.lv.ap <- gsub("@AP","",lv.ap)
     vec.lv.pa <- gsub("@PA","",lv.pa)
 
-    # durchlaufe lv.aps und prüfe, ob sie in pa sind, wenn nicht, dann ergänze
+    # durchlaufe lv.aps und pruefe, ob sie in pa sind, wenn nicht, dann ergaenze
     # das entsprechende Faktormodell
 
     add.type <- character(0)

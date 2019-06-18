@@ -1,5 +1,5 @@
 ## File Name: SRM_PARTABLE_FLAT.R
-## File Version: 0.07
+## File Version: 0.08
 
 SRM_PARTABLE_DELETE_SAME <- function(x) {
 
@@ -169,7 +169,7 @@ SRM_PARTABLE_FLAT_PERSON  <- function(PARLIST = NULL,
 
   ## 2.3 Default Observed Variable Intercepts
   #if(auto.int.ov && length(rr.ov.names.a) > 0L && length(rr.ov.names.p) > 0L) {
-  #   ## Achtung, muss intersect tatsächlich sein?
+  #   ## Achtung, muss intersect tatsaechlich sein?
   #   tmp <- Reduce(union, list(rr.ov.names.a,rr.ov.names.p))
   #   lhs <- c(lhs, tmp)
   #   rhs <- c(rhs, tmp)
@@ -509,7 +509,7 @@ SRM_PARTABLE_FLAT_DYAD  <- function(PARLIST,
 
   ## 2.3 Default Observed Variable Intercepts
   #if(auto.int.ov && length(rr.ov.names.a) > 0L && length(rr.ov.names.p) > 0L) {
-  #   ## Achtung, muss intersect tatsächlich sein?
+  #   ## Achtung, muss intersect tatsaechlich sein?
   #   tmp <- Reduce(union, list(rr.ov.names.a,rr.ov.names.p))
   #   lhs <- c(lhs, tmp)
   #   rhs <- c(rhs, tmp)

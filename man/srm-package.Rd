@@ -1,9 +1,9 @@
 %% File Name: srm-package.Rd
-%% File Version: 0.06
+%% File Version: 0.07
 
 \name{srm-package}
 \alias{srm-package}
-\alias{srm}
+
 \docType{package}
 
 \title{

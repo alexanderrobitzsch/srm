@@ -1,5 +1,5 @@
 ## File Name: SRM_MAKE_DATA_MATRIX_DYAD.R
-## File Version: 0.276
+## File Version: 0.277
 
 
 
@@ -10,7 +10,7 @@ SRM_MAKE_DATA_MATRIX_DYAD <- function(data = NULL,
 {
 
      ## IMPORTANT: the function presumes that dyads
-     ## --- hier wird angenommen, dass pro Maß jeweils erst ij, dann ji, dann ij...
+     ## --- hier wird angenommen, dass pro Mass jeweils erst ij, dann ji, dann ij...
 
      ##-- how many round-robin groups
      rrgroups = unique(data[,rrgroup_name])

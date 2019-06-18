@@ -8,7 +8,7 @@ If you use `srm` and have suggestions for improvement or have found bugs, please
 
 The manual may be found here [https://alexanderrobitzsch.github.io/srm/](https://alexanderrobitzsch.github.io/srm/) 
 
-#### CRAN version `srm` NA (NA)
+#### CRAN version `srm` 0.1-166 (2019-06-18)
 
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version-last-release/srm)](https://cran.r-project.org/package=srm)
@@ -22,9 +22,9 @@ The CRAN version can be installed from within R using:
 utils::install.packages("srm")
 ```
 
-#### GitHub version `srm` 0.1-164 (2019-06-13)
+#### GitHub version `srm` 0.2-1 (2019-06-18)
 
-[![](https://img.shields.io/badge/github%20version-0.1--164-orange.svg)](https://github.com/alexanderrobitzsch/srm)&#160;&#160;
+[![](https://img.shields.io/badge/github%20version-0.2--1-orange.svg)](https://github.com/alexanderrobitzsch/srm)&#160;&#160;
 
 The version hosted [here](https://github.com/alexanderrobitzsch/srm) is the development version of `srm`. 
 The GitHub version can be installed using `devtools` as:

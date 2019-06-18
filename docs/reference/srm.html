@@ -66,7 +66,7 @@ Nestler, 2018)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">srm</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Versions">0.1-vv</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Versions">0.2-vv</span>
       </span>
     </div>
 
@@ -277,7 +277,7 @@ Wert1@PA ~~ 0*Wert1@PA
 '</span>
 
 <span class='co'>#-- estimate model</span>
-<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>srm</span><span class='kw ns'>::</span><span class='fu'>srm</span>(<span class='no'>mf</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>dat</span>, <span class='kw'>rrgroup_name</span><span class='kw'>=</span><span class='st'>"Group"</span>, <span class='kw'>conv_par</span><span class='kw'>=</span><span class='fl'>1e-4</span>, <span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>20</span>)
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>srm</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/srm/topics/srm'>srm</a></span>(<span class='no'>mf</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>dat</span>, <span class='kw'>rrgroup_name</span><span class='kw'>=</span><span class='st'>"Group"</span>, <span class='kw'>conv_par</span><span class='kw'>=</span><span class='fl'>1e-4</span>, <span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>20</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>mod1</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Round'>round</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/coef'>coef</a></span>(<span class='no'>mod1</span>),<span class='fl'>3</span>)
 
@@ -313,7 +313,7 @@ Wert2@PA ~~ 0*Wert2@PA
 '</span>
 
 <span class='co'>#-- estimate model</span>
-<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>srm</span><span class='kw ns'>::</span><span class='fu'>srm</span>(<span class='no'>mf</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>dat</span>, <span class='kw'>rrgroup_name</span><span class='kw'>=</span><span class='st'>"Group"</span>, <span class='kw'>conv_par</span><span class='kw'>=</span><span class='fl'>1e-4</span>, <span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>20</span>)
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>srm</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/srm/topics/srm'>srm</a></span>(<span class='no'>mf</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>dat</span>, <span class='kw'>rrgroup_name</span><span class='kw'>=</span><span class='st'>"Group"</span>, <span class='kw'>conv_par</span><span class='kw'>=</span><span class='fl'>1e-4</span>, <span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>20</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>mod1</span>)
 
 <span class='co'>#############################################################################</span>
@@ -338,12 +338,12 @@ Wert1@AP ~~ 0*Wert1@PA
 Wert3@AP ~~ 0*Wert3@PA
 '</span>
 <span class='co'>#-- estimate model</span>
-<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>srm</span><span class='kw ns'>::</span><span class='fu'>srm</span>(<span class='no'>mf</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>dat</span>, <span class='kw'>rrgroup_name</span><span class='kw'>=</span><span class='st'>"Group"</span>, <span class='kw'>conv_par</span><span class='kw'>=</span><span class='fl'>1e-4</span>)
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>srm</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/srm/topics/srm'>srm</a></span>(<span class='no'>mf</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>dat</span>, <span class='kw'>rrgroup_name</span><span class='kw'>=</span><span class='st'>"Group"</span>, <span class='kw'>conv_par</span><span class='kw'>=</span><span class='fl'>1e-4</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>mod1</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/coef'>coef</a></span>(<span class='no'>mod1</span>)
 
 <span class='co'>#- use stats::nlminb() optimizer</span>
-<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>srm</span><span class='kw ns'>::</span><span class='fu'>srm</span>(<span class='no'>mf</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>dat</span>, <span class='kw'>rrgroup_name</span><span class='kw'>=</span><span class='st'>"Group"</span>, <span class='kw'>optimizer</span><span class='kw'>=</span><span class='st'>"nlminb"</span>, <span class='kw'>conv_par</span><span class='kw'>=</span><span class='fl'>1e-4</span>)
+<span class='no'>mod1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>srm</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/srm/topics/srm'>srm</a></span>(<span class='no'>mf</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>dat</span>, <span class='kw'>rrgroup_name</span><span class='kw'>=</span><span class='st'>"Group"</span>, <span class='kw'>optimizer</span><span class='kw'>=</span><span class='st'>"nlminb"</span>, <span class='kw'>conv_par</span><span class='kw'>=</span><span class='fl'>1e-4</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>mod1</span>)
 <span class='co'># }</span></pre>
   </div>

@@ -1,8 +1,8 @@
 Package: srm
 Type: Package
 Title: Structural Equation Modeling for the Social Relations Model
-Version: 0.1-164
-Date: 2019-06-13 22:24:11
+Version: 0.2-1
+Date: 2019-06-18 23:05:29
 Author: Steffen Nestler [aut], Alexander Robitzsch [aut, cre], 
         Oliver Luedtke [aut]
 Maintainer: Alexander Robitzsch <robitzsch@ipn.uni-kiel.de>
@@ -11,7 +11,7 @@ Description:
     the social relations model (Warner, Kenny, & Soto, 1979,
     <doi:10.1037/0022-3514.37.10.1742>). Maximum likelihood
     estimation (Gill & Swartz, 2001, <doi:10.2307/3316080>;
-    Nestler, 2018, <doi:10.3102/1076998617741106>) and 
+    Nestler, 2018, <doi:10.3102/1076998617741106>) and
     least squares estimation is supported (Bond & Malloy, 2018,
     <doi:10.1016/B978-0-12-811967-9.00014-X>).
 Depends:

@@ -1,5 +1,5 @@
 %% File Name: srm_arbsrm.Rd
-%% File Version: 0.23
+%% File Version: 0.24
 
 \name{srm_arbsrm}
 \alias{srm_arbsrm}
@@ -101,7 +101,7 @@ mod1$par_summary
 coef(mod1)
 summary(mod1)
 
-\dontrun{
+\donttest{
 #-- estimation with original Bond and Malloy code
 mod1a <- srm::srm_arbsrm(dat, use_srm=FALSE)
 summary(mod1a)

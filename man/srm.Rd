@@ -1,5 +1,5 @@
 %% File Name: srm.Rd
-%% File Version: 0.157
+%% File Version: 0.158
 
 \name{srm}
 \alias{srm}
@@ -166,7 +166,7 @@ mod1 <- srm::srm(mf, data = dat, rrgroup_name="Group", conv_par=1e-4, maxiter=20
 summary(mod1)
 round(coef(mod1),3)
 
-\dontrun{
+\donttest{
 #############################################################################
 # EXAMPLE 2: Bivariate SRM
 #############################################################################

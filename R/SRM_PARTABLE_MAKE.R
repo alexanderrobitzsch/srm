@@ -1,5 +1,5 @@
 ## File Name: SRM_PARTABLE_MAKE.R
-## File Version: 0.233
+## File Version: 0.234
 
 SRM_PARTABLE_MAKE <- function(model.syntax = '',
             ngroups = 1L, as.a.data.frame = TRUE,
@@ -15,7 +15,7 @@ SRM_PARTABLE_MAKE <- function(model.syntax = '',
     model.d <- models[[2]]
 
     # Analyses for the person.data
-    # Ziel: Eine Liste, in dem eine Formel aufgelöst ist in die einzelnen
+    # Ziel: Eine Liste, in dem eine Formel aufgeloest ist in die einzelnen
     # Komponenten
     # z.B. f1@A =~ V1@A+V2@A+V3@A
     # -->

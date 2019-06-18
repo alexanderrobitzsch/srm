@@ -1,10 +1,10 @@
 ## File Name: SRM_ARBSRM_BOND_MALLOY.R
-## File Version: 0.25
+## File Version: 0.26
 
 
 
 ## This function contains the code of
-## Bond & Malloy (2018). ARBSRM – The General Social Relations Model
+## Bond & Malloy (2018). ARBSRM - The General Social Relations Model
 ## http://thomasemalloy.org/arbsrm-the-general-social-relations-model/
 ## copied and slightly edited from the file
 ## http://thomasemalloy.org/wp-content/uploads/2017/09/arbcodeR.pdf
