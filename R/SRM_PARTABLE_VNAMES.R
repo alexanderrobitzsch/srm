@@ -1,5 +1,8 @@
 ## File Name: SRM_PARTABLE_VNAMES.R
-## File Version: 0.02
+## File Version: 0.11
+
+
+
 ## this functions determines the names of the latent rr - vars for actors and
 ## partners, observed rr-vars for actors and partners and so on
 
@@ -391,7 +394,7 @@ SRM_PARTABLE_VNAMES_DYAD <- function(parlist, type = NULL) ## Add group here
         if(!(length(type) == 1L && type %in% c("rr.lv.ij","rv.lv.ji"))) {
             sv.eqs.y <- unique( parlist$lhs[ parlist$group == g &
                                              parlist$op == "~"  &
-                                             grepl("@E",parlist$lhs) ] )
+                                             grepl("@F",parlist$lhs) ] )
         }
         # store in sv.eqs.y
         if("sv.eqs.y" %in% type) { OUT$sv.eqs.y[[g]] <- sv.eqs.y }
@@ -438,7 +441,7 @@ SRM_PARTABLE_VNAMES_DYAD <- function(parlist, type = NULL) ## Add group here
         if(!(length(type) == 1L && type %in% c("rr.lv.ij","rv.lv.ji"))) {
             sv.eqs.x <- unique( parlist$rhs[ parlist$group == g &
                                              parlist$op == "~"  &
-                                             grepl("@E",parlist$rhs) ] )
+                                             grepl("@F",parlist$rhs) ] )
         }
         # store in sv.eqs.x
         if("sv.eqs.x" %in% type) { OUT$sv.eqs.x[[g]] <- sv.eqs.x }

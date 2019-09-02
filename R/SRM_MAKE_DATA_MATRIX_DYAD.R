@@ -1,6 +1,5 @@
 ## File Name: SRM_MAKE_DATA_MATRIX_DYAD.R
-## File Version: 0.277
-
+## File Version: 0.281
 
 
 SRM_MAKE_DATA_MATRIX_DYAD <- function(data = NULL,

@@ -1,5 +1,5 @@
 %% File Name: srm.Rd
-%% File Version: 0.158
+%% File Version: 0.166
 
 \name{srm}
 \alias{srm}
@@ -15,7 +15,7 @@ Structural Equation Model for the Social Relations Model
 
 \description{
 Provides an estimation routine for a multiple group structural equation model
-for the social relations model (SRM; Warner, Kenny, & Soto, 1979).
+for the social relations model (SRM; Kenny & La Voie, 1984; Warner, Kenny, & Soto, 1979).
 The model is estimated by maximum likelihood (Gill & Swartz, 2001;
 Nestler, 2018).
 }
@@ -30,7 +30,7 @@ srm(model.syntax = NULL, data = NULL, group.var = NULL, rrgroup_name = NULL,
 
 \method{coef}{srm}(object, ...)
 \method{vcov}{srm}(object, ...)
-\method{summary}{srm}(object, digits=3, file=NULL, ...)
+\method{summary}{srm}(object, digits=3, file=NULL, layout=1, ...)
 \method{logLik}{srm}(object, ...)
 }
 %- maybe also 'usage' for other objects documented here.
@@ -91,6 +91,7 @@ be simplified by Woodbury identity}
 \item{object}{Object of class \code{srm}}
 \item{file}{Optional file name for summary output}
 \item{digits}{Number of digits after decimal in summary output}
+\item{layout}{Different layouts (\code{1} or \code{2}) for layout of \code{summary}}
 \item{\dots}{Further arguments to be passed}
 }
 
@@ -114,12 +115,16 @@ Gill, P. S., & Swartz, T. B. (2001). Statistical analyses for round robin intera
 data. \emph{Canadian Journal of Statistics, 29}(2), 321-331.
 \doi{10.2307/3316080}
 
+Kenny, D. A., & La Voie, L. J. (1984).  The social relations model.  In L. Berkowitz (Ed.),
+\emph{Advances in experimental social psychology} (Vol. 18, pp. 142-182).
+Orlando, FL: Academic. \doi{10.1016/S0065-2601(08)60144-6}
+
 Nestler, S. (2018). Likelihood estimation of the multivariate social relations model.
 \emph{Journal of Educational and Behavioral Statistics, 43}(4), 387-406.
 \doi{10.3102/1076998617741106}
 
 Warner, R. M., Kenny, D. A., & Soto, M. (1979). A new round robin analysis of variance for
-social interaction data. \emph{Journal of Personality and Social Psychology, 37},
+social interaction data. \emph{Journal of Personality and Social Psychology, 37}(10),
 1742-1757. \doi{10.1037/0022-3514.37.10.1742}
 }
 

@@ -1,7 +1,7 @@
 ## File Name: SRM_CREATE_DESIGN_MATRICES.R
-## File Version: 0.319
+## File Version: 0.322
 
-SRM_CREATE_DESIGN_MATRICES <- function( data_list, ngroups, use_rcpp=TRUE)
+SRM_CREATE_DESIGN_MATRICES <- function( data_list, ngroups, rrgroup_name, use_rcpp=TRUE)
 {
     # data_list$ngroups <- ngroups
     comp_design <- TRUE
@@ -16,7 +16,7 @@ SRM_CREATE_DESIGN_MATRICES <- function( data_list, ngroups, use_rcpp=TRUE)
         Xs_rr <- list()
         Wds_rr <- list()
         Wds_rr_rcpp <- list()
-        groups <- unique( data_list[[gg]]$y$Group )
+        groups <- unique( data_list[[gg]]$y[,rrgroup_name] )
         data_list[[1]]$nrr <- NR
         y_gg <- data_list[[gg]]$y
         Zis_gg <- data_list[[gg]]$Zis
@@ -25,7 +25,7 @@ SRM_CREATE_DESIGN_MATRICES <- function( data_list, ngroups, use_rcpp=TRUE)
         calculate_gg <- rep(TRUE,NR)
         for (rr in seq_len(NR) ){
             # y
-            ind_rr <- which(y_gg$Group == groups[rr])
+            ind_rr <- which(y_gg[,rrgroup_name] == groups[rr])
             y_temp <- y_gg[ ind_rr, ]
             y_rr[[rr]] <- y_temp$y
 

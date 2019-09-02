@@ -1,5 +1,5 @@
 %% File Name: srm-package.Rd
-%% File Version: 0.07
+%% File Version: 0.09
 
 \name{srm-package}
 \alias{srm-package}
@@ -49,12 +49,16 @@ Gill, P. S., & Swartz, T. B. (2001). Statistical analyses for round robin intera
 data. \emph{Canadian Journal of Statistics, 29}(2), 321-331.
 \doi{10.2307/3316080}
 
+Kenny, D. A., & La Voie, L. J. (1984).  The social relations model.  In L. Berkowitz (Ed.), 
+\emph{Advances in experimental social psychology} (Vol. 18, pp. 142-182).  
+Orlando, FL: Academic. \doi{10.1016/S0065-2601(08)60144-6}  
+
 Nestler, S. (2018). Likelihood estimation of the multivariate social relations model. 
 \emph{Journal of Educational and Behavioral Statistics, 43}(4), 387-406.
 \doi{10.3102/1076998617741106}
 
 Warner, R. M., Kenny, D. A., & Soto, M. (1979). A new round robin analysis of variance for
-social interaction data. \emph{Journal of Personality and Social Psychology, 37}, 
+social interaction data. \emph{Journal of Personality and Social Psychology, 37}(10), 
 1742-1757. \doi{10.1037/0022-3514.37.10.1742} 
 }
 

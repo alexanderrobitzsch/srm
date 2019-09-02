@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Example Datasets for the <span class="pkg">srm</span> Package — data.srm • srm</title>
+<title>Zero Acquaintance Round Robin Data From Albirght, Kenny, and Malloy — Zero • srm</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Example Datasets for the <span class="pkg">srm</span> Package — data.srm" />
+<meta property="og:title" content="Zero Acquaintance Round Robin Data From Albirght, Kenny, and Malloy — Zero" />
 
-<meta property="og:description" content="Some simulated example datasets for the srm package." />
+<meta property="og:description" content="Data from Study 3 of Albright et al. (1988)" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -99,33 +99,52 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Example Datasets for the <span class="pkg">srm</span> Package</h1>
+    <h1>Zero Acquaintance Round Robin Data From Albirght, Kenny, and Malloy</h1>
     
-    <div class="hidden name"><code>data.srm.Rd</code></div>
+    <div class="hidden name"><code>Zero.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Some simulated example datasets for the <span class="pkg">srm</span> package.</p>
+    <p>Data from Study 3 of Albright et al. (1988)</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>data.srm01</span>)</pre>
+    <pre class="usage"><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>Zero</span>)</pre>
         
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <ul>
-<li><p>The dataset <code>data.srm01</code> contains three variables, 10 round robin
-groups with 10 members each.</p>
-<p><code>'data.frame':   900 obs. of  7 variables:</code> <br />
-<code> $ Group  : num  1 1 1 1 1 1 1 1 1 1 ...</code> <br />
-<code> $ dyad   : num  1 2 3 4 5 6 7 8 9 10 ...</code> <br />
-<code> $ Actor  : num  1 1 1 1 1 1 1 1 1 2 ...</code> <br />
-<code> $ Partner: num  2 3 4 5 6 7 8 9 10 3 ...</code> <br />
-<code> $ Wert1  : num  -0.15 -0.95 0.82 1.15 -1.79 1.17 1.79 -0.57 -0.46 1.19 ...</code> <br />
-<code> $ Wert2  : num  -0.77 0.17 0.42 0.16 -0.44 0.89 1.67 -1.9 -0.74 2.67 ...</code> <br />
-<code> $ Wert3  : num  -0.49 0.08 -0.12 1.16 -2.78 -0.74 2.66 -1.28 -0.45 1.93 ...</code> <br /></p></li>
-</ul>
+    <p>A data frame with 636 measurements of 36 round robin groups on the following 15 round-robin
+variables (taken on 7-point rating scales with higher values indicating more of the
+trait): <br /></p>
+<p><code>sociable</code>: rating of dimension sociable-reclusive <br />
+<code>good</code>: rating of dimension good-natured-irritable <br />
+<code>responsible</code>: rating of dimension responsible-undependable <br />
+<code>calm</code>: rating of dimension calm-anxious <br />
+<code>intellectual</code>: rating of dimension intellectual-unintellectual <br />
+<code>imaginative</code>: rating of dimension imaginative-unimaginative <br />
+<code>talkative</code>: rating of dimension talkative-silent <br />
+<code>fussy</code>: rating of dimension fussy-careless <br />
+<code>composed</code>: rating of dimension composed-excitable <br />
+<code>cooperative</code>: rating of dimension cooperative-negativistic <br />
+<code>physically_attractive</code>: rating of dimension physically attractive-unattractive <br />
+<code>formal_dress</code>: rating of dimension formal dress-casual dress <br />
+<code>neatly_dressed</code>: rating of dimension neatly dressed-sloppy dress <br />
+<code>athletic</code>: rating of dimension athletic-not athletic <br />
+<code>young</code>: rating of dimension young-old <br /></p>
+<p>The data frame also contains the gender (<code>actor.sex</code>; <code>1</code> = F,
+<code>2</code> = M) of the participants and their self-ratings on the five assessed traits
+(<code>actor.sociable</code> and so on).</p>
+    
+    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
+
+    <p><a href='http://davidakenny.net/srm/srmdata.htm'>http://davidakenny.net/srm/srmdata.htm</a></p>
+    
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p>Albright, L., Kenny, D. A., &amp; Malloy, T. E. (1988). Consensus in personality judgments
+at zero acquaintance. <em>Journal of Personality and Social Psychology, 55</em>(3),
+387-395. doi: <a href='http://doi.org/10.1037/0022-3514.55.3.387'>10.1037/0022-3514.55.3.387</a></p>
     
 
   </div>
@@ -134,6 +153,10 @@ groups with 10 members each.</p>
     <ul class="nav nav-pills nav-stacked">
       
       <li><a href="#format">Format</a></li>
+
+      <li><a href="#source">Source</a></li>
+
+      <li><a href="#references">References</a></li>
           </ul>
 
   </div>

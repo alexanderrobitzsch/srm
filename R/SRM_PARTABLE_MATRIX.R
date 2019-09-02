@@ -1,5 +1,5 @@
 ## File Name: SRM_PARTABLE_MATRIX.R
-## File Version: 0.07
+## File Version: 0.11
 
 ## functions to compute the matrix representation
 ## overall function that is called in SRM_AUFRUF
@@ -292,7 +292,7 @@ SRM_PARTABLE_TO_MATRIX_DYAD <- function(srmpartable = NULL,
     # global settings
     #meanstructure <- any(srmpartable$op == "~1")
 
-    if(any(srmpartable$op == "~" & grepl("@E",srmpartable$rhs))) { Gamma <- TRUE
+    if(any(srmpartable$op == "~" & grepl("@F",srmpartable$rhs))) { Gamma <- TRUE
     } else { Gamma <- FALSE }
 
 

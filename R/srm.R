@@ -1,5 +1,5 @@
 ## File Name: srm.R
-## File Version: 0.5956
+## File Version: 0.6001
 
 
 srm <- function(model.syntax = NULL,
@@ -27,11 +27,12 @@ z0 <- Sys.time()
     } else {
         ngroups = length(unique(data[,c(group.var)]))
     }
-
     ## Step 1: use model syntax to generate a parameter table
     parm.table <- SRM_PARTABLE_MAKE(model.syntax = model.syntax, ngroups = ngroups,
                         data_colnames = colnames(data), method=method )
-    var_names <- attr(parm.table, "var_names")
+    rrvar_names <- attr(parm.table, "rrvar_names")
+    personcov_names <- attr(parm.table, "personcov_names")
+    dyadcov_names <- attr(parm.table, "dyadcov_names")
 # cat(" *** make partable ") ; z1 <- Sys.time(); print(z1-z0) ; z0 <- z1
 
     #-- add more information to parameter table
@@ -60,13 +61,15 @@ z0 <- Sys.time()
     ## Step 2: make list with data
     data_list <- SRM_MAKE_DATA_LIST(srm_data = data, person_names = person_names ,
                             rrgroup_name = rrgroup_name, group.var = group.var,
-                            fixed.groups = fixed.groups, var_names=var_names, use_rcpp=TRUE,
-                            do_checks=FALSE)
+                            fixed.groups = fixed.groups, rrvar_names=rrvar_names,
+                            personcov_names=personcov_names, dyadcov_names=dyadcov_names,
+                            use_rcpp=TRUE, do_checks=FALSE)
+    rrgroup_name <- attr(data_list, "rrgroup_name")
 # cat(" *** make data list") ; z1 <- Sys.time(); print(z1-z0) ; z0 <- z1
 
     # make design matrices
     data_list <- SRM_CREATE_DESIGN_MATRICES( data_list = data_list,
-                        ngroups = ngroups, use_rcpp=use_rcpp)
+                        ngroups = ngroups, rrgroup_name=rrgroup_name, use_rcpp=use_rcpp)
 # cat(" *** create design matrices") ; z1 <- Sys.time(); print(z1-z0) ; z0 <- z1
 
     ## Step 3: estimate the model

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Citation and Authors • srm</title>
+<title>Zero Acquaintance Round Robin Data from Kenny — Kenzer • srm</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -25,12 +25,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
-<link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script>
+<link href="../pkgdown.css" rel="stylesheet">
+<script src="../pkgdown.js"></script>
 
 
 
-<meta property="og:title" content="Citation and Authors" />
+<meta property="og:title" content="Zero Acquaintance Round Robin Data from Kenny — Kenzer" />
+
+<meta property="og:description" content="Data from Albright et al. (1988) Study 2" />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -47,7 +50,7 @@
   </head>
 
   <body>
-    <div class="container template-citation-authors">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -59,21 +62,21 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">srm</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <a class="navbar-link" href="../index.html">srm</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Versions">0.3-vv</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">
+  <a href="../index.html">
     <span class="fa fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="reference/index.html">Reference</a>
+  <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
       
@@ -94,38 +97,60 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Citation</h1>
-      <small class="dont-index">Source: <a href='https://github.com/alexanderrobitzsch/srm/blob/master/inst/CITATION'><code>inst/CITATION</code></a></small>
+    <h1>Zero Acquaintance Round Robin Data from Kenny</h1>
+    
+    <div class="hidden name"><code>Kenzer.Rd</code></div>
     </div>
 
-    <p>Nestler S, Robitzsch A, Luedtke O (2019).
-<em>srm: Structural equation modeling for the social relations model</em>.
-R package version 0.3-2, <a href="https://CRAN.R-project.org/package=srm">https://CRAN.R-project.org/package=srm</a>. 
-</p>
-    <pre>@Manual{,
-  title = {srm: Structural equation modeling for the social relations model},
-  author = {Steffen Nestler and Alexander Robitzsch and Oliver Luedtke},
-  year = {2019},
-  note = {R package version 0.3-2},
-  url = {https://CRAN.R-project.org/package=srm},
-}</pre>
-    <div class="page-header">
-      <h1>Authors</h1>
+    <div class="ref-description">
+    
+    <p>Data from Albright et al. (1988) Study 2</p>
+    
     </div>
 
-    <ul class="list-unstyled">
-      <li>
-        <p><strong>Alexander Robitzsch</strong>. Maintainer. 
-        </p>
-      </li>
-    </ul>
+    <pre class="usage"><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>Kenzer</span>)</pre>
+        
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+
+    <p>A data frame with 124 measurements from 7 round-robin groups on the following 5 round-robin
+variables (taken on unnumbered 7-point rating scales with higher numbers indicating a
+higher value of the trait): <br /></p>
+<p><code>sociable</code>: rating of dimension sociable <br />
+<code>irritable</code>: rating of dimension good-natured <br />
+<code>responsible</code>: rating of dimension responsible <br />
+<code>anxious</code>: rating of dimension calm <br />
+<code>intellectual</code>: rating of dimension intellectual <br /></p>
+<p>The data frame also contains the gender (<code>actor.sex</code>; <code>1</code> = F,
+<code>2</code> = M) of the participants and their self-ratings on the five assessed traits
+(<code>actor.sociable</code> and so on).</p>
+    
+    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
+
+    <p><a href='http://davidakenny.net/srm/srmdata.htm'>http://davidakenny.net/srm/srmdata.htm</a></p>
+    
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p>Albright, L., Kenny, D. A., &amp; Malloy, T. E. (1988). Consensus in personality judgments
+at zero acquaintance. <em>Journal of Personality and Social Psychology, 55</em>(3),
+387-395. doi: <a href='http://doi.org/10.1037/0022-3514.55.3.387'>10.1037/0022-3514.55.3.387</a></p>
+    
 
   </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      
+      <li><a href="#format">Format</a></li>
 
+      <li><a href="#source">Source</a></li>
+
+      <li><a href="#references">References</a></li>
+          </ul>
+
+  </div>
 </div>
-
 
       <footer>
       <div class="copyright">

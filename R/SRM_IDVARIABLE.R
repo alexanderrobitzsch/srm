@@ -1,5 +1,5 @@
 ## File Name: SRM_IDVARIABLE.R
-## File Version: 0.17
+## File Version: 0.25
 
 
 SRM_IDVARIABLE <- function(TABLE, method="ml")
@@ -16,7 +16,7 @@ SRM_IDVARIABLE <- function(TABLE, method="ml")
     index[idx] <- seq(1,length(idx),1)
     last <- length(idx)
 
-    # all free parameters that are constrainted get a number
+    # all free parameters that are constrained get a number
     idx <- which(!(is.na(TABLE$equal)) & TABLE$free == 1)
     name <- unique(TABLE$equal[idx])
     lauf <- last + 1
@@ -29,9 +29,11 @@ SRM_IDVARIABLE <- function(TABLE, method="ml")
     TABLE$index <- index
     TABLE$equal <- NULL
     TABLE$mod.idx <- NULL
-
-    TABLE <- TABLE[c("group","lhs","op","rhs","index","mat",
-                     "row","col","fixed","starts","user")]
+    TABLE_vars <- c("group","lhs","op","rhs","index","mat",
+                     "row","col","fixed","starts","user",
+                     "level")
+    TABLE_vars <- intersect(colnames(TABLE), TABLE_vars)
+    TABLE <- TABLE[TABLE_vars] # added by Steffen
     return(TABLE)
 
 }

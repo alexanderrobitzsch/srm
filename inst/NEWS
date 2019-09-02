@@ -18,8 +18,9 @@ CHANGELOG srm
 
 
 
+
 --------------------------------------------------------------------------
-VERSIONS srm 0.2  |  2019-06-18  |  Last: srm 0.2-1
+VERSIONS srm 0.3  |  2019-09-02  |  Last: srm 0.3-2
 --------------------------------------------------------------------------
  
 xxx   * ---
@@ -30,6 +31,17 @@ EXAMP * ---
 
 
 
+--------------------------------------------------------------------------
+VERSIONS srm 0.2  |  2019-08-30  |  Last: srm 0.2-10
+--------------------------------------------------------------------------
+ 
+NOTE  * changed default layout of summary function and included
+        argument 'layout' in summary()
+ADDED * included datasets downloaded from homepage of David Kenny
+        (thanks to David Kenny)
+
+DATA  * HallmarkKenny, Kenzer, Malzer, Warner, Zero
+EXAMP * ---
 
 --------------------------------------------------------------------------
 VERSIONS srm 0.1  |  2019-06-18  |  Last: srm 0.1-166

@@ -1,5 +1,6 @@
 ## File Name: SRM_PARSER_FUNKTIONEN.R
-## File Version: 0.12
+## File Version: 0.14
+
 
 SRM_PARSER_PREPARE <- function(model.syntax='') {
 
@@ -88,7 +89,7 @@ SRM_PARSER_LHS <- function(lhs.s,op="EMPTY") {
 
 }
 
-SRM_PARSER_RHS <- function(rhs.s,op="EMPTY") {
+SRM_PARSER_RHS <- function(rhs.s,op=NULL,name=NULL) {
 
     # Parser for rhs-FORMULAS
     out <- list()
@@ -107,7 +108,9 @@ SRM_PARSER_RHS <- function(rhs.s,op="EMPTY") {
           out <- c(vector("list", 1L), out)
           NAMES <- all.vars(rhs.s)
           names(out)[1L] <- NAMES[1]
-          out[[1L]]$ptype2 <- "E"
+          if ( name == "Person" ) { out[[1L]]$ptype2 <- "E" }
+          else if ( name == "Dyad") { out[[1L]]$ptype2 <- "F" }
+
           break
 
        } else if ( is.numeric(rhs.s) & op == "~") { # an intercept without modifier
@@ -145,7 +148,8 @@ SRM_PARSER_RHS <- function(rhs.s,op="EMPTY") {
           out <- c(vector("list", 1L), out)
           NAMES <- all.vars(rhs.s[[3L]])
           names(out)[1L] <- NAMES[1]
-          out[[1L]]$ptype2 <- "E"
+          if ( name == "Person" ) { out[[1L]]$ptype2 <- "E" }
+          else if ( name == "Dyad") { out[[1L]]$ptype2 <- "F" }
 
           # get the modifier
           mod <- SRM_GET_MODIFIER(rhs.s[[2L]])
@@ -204,7 +208,8 @@ SRM_PARSER_RHS <- function(rhs.s,op="EMPTY") {
 
           if(length(i.var) == 1L) { ## exo variable without modifier
               names(out)[1L] <- i.var[n.var]
-              out[[1L]]$ptype2 <- "E"
+              if ( name == "Person" ) { out[[1L]]$ptype2 <- "E" }
+              else if ( name == "Dyad") { out[[1L]]$ptype2 <- "F" }
           }
 
           # are there modifiers prior to the variable?
@@ -323,7 +328,7 @@ SRM_PARSER_ADD_PTYPE_EQS <- function(PARLIST) {
 
 }
 
-SRM_PARSER_LIST <- function( model, ngroups = 1L, name="EMPTY" ) {
+SRM_PARSER_LIST <- function( model, ngroups = 1L, name = NULL ) {
 
     SRM.type <- character(0)
     SRM.lhs <- character(0)
@@ -371,7 +376,7 @@ SRM_PARSER_LIST <- function( model, ngroups = 1L, name="EMPTY" ) {
        # Step 4: Get list of values for the rhs formula
        #         (including fixed and start values)
        rhs.s <- stats::as.formula(paste("~",rhs))
-       out.rhs <- SRM_PARSER_RHS(rhs.s[[2L]],op=op)
+       out.rhs <- SRM_PARSER_RHS(rhs.s[[2L]],op=op,name=name)
 
        # Step 5: save all things in a list
        for (j in 1:length(out.lhs)) {
