@@ -22,9 +22,9 @@ The CRAN version can be installed from within R using:
 utils::install.packages("srm")
 ```
 
-#### GitHub version `srm` 0.3-2 (2019-09-02)
+#### GitHub version `srm` 0.3-4 (2019-10-25)
 
-[![](https://img.shields.io/badge/github%20version-0.3--2-orange.svg)](https://github.com/alexanderrobitzsch/srm)&#160;&#160;
+[![](https://img.shields.io/badge/github%20version-0.3--4-orange.svg)](https://github.com/alexanderrobitzsch/srm)&#160;&#160;
 
 The version hosted [here](https://github.com/alexanderrobitzsch/srm) is the development version of `srm`. 
 The GitHub version can be installed using `devtools` as:

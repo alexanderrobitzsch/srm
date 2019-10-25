@@ -1,5 +1,5 @@
 ## File Name: SRM_PRINT_SUMMARY_LAYOUT1.R
-## File Version: 0.03
+## File Version: 0.05
 
 
 SRM_PRINT_SUMMARY_LAYOUT1 <- function( object = NULL, digits = 3L )

@@ -1,5 +1,5 @@
 ## File Name: SRM_PREPARE_DATA.R
-## File Version: 0.293
+## File Version: 0.302
 
 
 ## all functions assume that data is sorted in a specific way
@@ -30,13 +30,21 @@ SRM_PREPARE_DATA <- function( data = NULL,
     })
     rrdata <- do.call("rbind",rrdata)
 
-    #-- exclude missings and then sort rrdata
+    #-- exclude missings
     rrdata <- rrdata[ !is.na( rrdata$y ) , ]
-    rrdata <- rrdata[order( rrdata[,group.var],
-                            rrdata$no_vars,
-                            rrdata[,rrgroup_name],
-                            rrdata[,person_names[1]],
-                            rrdata[,person_names[2]]),]
+    
+    #-- add number of data points per rr-group
+    rrdata$rrcount <- ave( rrdata$y, 
+                           rrdata[,c(group.var,rrgroup_name)], 
+                           FUN = length )
+                           
+    #-- sort the data frame
+    rrdata <- rrdata[order(  rrdata[,group.var],
+                            -rrdata$rrcount,
+                             rrdata[,rrgroup_name],
+                             rrdata$no_vars,
+                             rrdata[,person_names[1]],
+                             rrdata[,person_names[2]] ),]
 
     #-- make person data frame
     if ( !identical( personcov_names, character(0) ) ) {

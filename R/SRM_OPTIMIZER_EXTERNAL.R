@@ -1,5 +1,5 @@
 ## File Name: SRM_OPTIMIZER_EXTERNAL.R
-## File Version: 0.13
+## File Version: 0.15
 
 SRM_OPTIMIZER_EXTERNAL <- function(optimizer, x0, fn, gr, args_opt0, maxiter,
         lower, upper, conv_dev, conv_par, verbose)
@@ -49,6 +49,7 @@ SRM_OPTIMIZER_EXTERNAL <- function(optimizer, x0, fn, gr, args_opt0, maxiter,
     res$time_diff <- s2-s1
     res$optimizer <- optimizer
     res$converged <- ( res$convergence == 0 )
+    res$value <- -res$objective
 
     #- post-processing
     if (optimizer=="nlminb"){
