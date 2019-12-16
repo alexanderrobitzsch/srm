@@ -1,14 +1,14 @@
 ## File Name: SRM_PINV.R
-## File Version: 0.07
+## File Version: 0.081
 
 SRM_PINV <- function(x, output_det=FALSE)
 {
     is_ginv <- FALSE
     e1 <- try( chol2inv(chol(x)), silent=TRUE)
-    if (class(e1)=="try-error"){
+    if (inherits(x=e1, what="try-error") ){
         e1 <- try( solve(x), silent=TRUE)
     }
-    if (class(e1)=="try-error"){
+    if (inherits(x=e1, what="try-error") ){
         res <- SRM_GINV(x=x, output_det=output_det)
         is_ginv <- TRUE
         output_det <- FALSE
