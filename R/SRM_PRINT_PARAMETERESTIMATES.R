@@ -1,5 +1,5 @@
 ## File Name: SRM_PRINT_PARAMETERESTIMATES.R
-## File Version: 0.02
+## File Version: 0.108
 
 
 SRM_PRINT_PARAMETERESTIMATES <- function( object = NULL,
@@ -154,8 +154,11 @@ SRM_PRINT_PARAMETERESTIMATES <- function( object = NULL,
                     tmp <- rep("", length(LHS))
                     M[lhs.idx,  1 ] <- sprintf("%1s%-15s", tmp, LHS)
                     M[rhs.idx, ] <- m[row.idx,]
-
                     idx <- duplicated(M[,1])
+                    if ( s %in% c("Regressions") ){
+                        idx2 <- M[,"Estimate"] == ""                        
+                        idx <- idx & idx2
+                    }
                     #M[,1] <- ifelse( idx, "", M[,1])
                     M <- rbind( M[!idx, ] )
 

@@ -20,10 +20,11 @@ CHANGELOG srm
 
 
 --------------------------------------------------------------------------
-VERSIONS srm 0.4  |  2019-12-16  |  Last: srm 0.4-2
+VERSIONS srm 0.4  |  2020-04-23  |  Last: srm 0.4-13
 --------------------------------------------------------------------------
  
-xxx   * ---
+NOTE  * changed several defaults for models with constraints
+FIXED * fixed a bug for models in which a regression is involved
 
 
 DATA  * ---

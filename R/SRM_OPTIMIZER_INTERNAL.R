@@ -1,5 +1,5 @@
 ## File Name: SRM_OPTIMIZER_INTERNAL.R
-## File Version: 0.16
+## File Version: 0.193
 
 SRM_OPTIMIZER_INTERNAL <- function(x0, fn, args_fs, conv_dev, conv_par,
         maxiter, do_line_search=TRUE, line_search_iter_max=6,
@@ -28,26 +28,32 @@ SRM_OPTIMIZER_INTERNAL <- function(x0, fn, args_fs, conv_dev, conv_par,
         infomat <- res[[3]]             # res[[3]]  $expected_infomat
         grad <- res[[2]]                # res[[2]]  $grad
         ll <- res[[1]]                    # res[[1]]    $ll_new
+
         #- parameter update
-        incr <- SRM_OPTIMIZER_INTERNAL_COMPUTE_INCREMENT(grad=grad, infomat=infomat)
+        steplength <- 1
+        diagonal <- FALSE
+        incr <- SRM_OPTIMIZER_INTERNAL_COMPUTE_INCREMENT(grad=grad, infomat=infomat,
+                    diagonal=diagonal)
+        incr <- steplength*incr
         x <- xold + incr
         ll_diff <- ll-llold
-
         #- line search
         if (do_line_search){
             res <- SRM_OPTIMIZER_INTERNAL_LINE_SEARCH(xold=xold, incr=incr,
                         ll0=ll, fn=fn, args_fn=args_fs_ls,
-                        line_search_iter_max=line_search_iter_max)
+                        line_search_iter_max=line_search_iter_max, llold=llold)
             ll <- res$ll
             x <- res$x
             incr <- res$incr
         }
         change_par <- max(abs(x-xold))
         change_ll <- abs(ll-llold)/abs(ll)
+        relgrad <- max(abs(grad))/abs(ll)
         if (verbose){
-            cat("Iteration", iter, "| optim function", "=", round(ll,5) )
-            cat(" | Parameter change","=", round(change_par, change_digits_par) )
-            cat(" | Relative function change","=", round(change_ll, change_digits_dev), "\n" )
+            cat("Iteration", iter, "| optim fct", "=", round(ll,5) )
+            cat(" | Parm change","=", round(change_par, change_digits_par) )
+            cat(" | Rel fct change","=", round(change_ll, change_digits_dev) )
+            cat(" | Rel grad","=", round(relgrad, change_digits_dev), "\n" )
             utils::flush.console()
         }
         ll_history[iter] <- ll

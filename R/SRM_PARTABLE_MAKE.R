@@ -1,5 +1,5 @@
 ## File Name: SRM_PARTABLE_MAKE.R
-## File Version: 0.249
+## File Version: 0.256
 
 
 SRM_PARTABLE_MAKE <- function(model.syntax = '',
@@ -30,7 +30,7 @@ SRM_PARTABLE_MAKE <- function(model.syntax = '',
 
     pers.list <- SRM_PARSER_LIST(model.p, ngroups = ngroups, name="Person")
     dyad.list <- SRM_PARSER_LIST(model.d, ngroups = ngroups, name="Dyad")
-    dyad.list <- SRM_PARSER_LIST_ADD_DYAD_FACTORS (dyad.list)
+    dyad.list <- SRM_PARSER_LIST_ADD_DYAD_FACTORS(dyad.list)
 
     # We use pers.list to construct a pers.list that
     # contains the user-specified parameters, the default-parameters and

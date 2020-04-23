@@ -1,5 +1,5 @@
 ## File Name: SRM_PRINT_SUMMARY_LAYOUT2.R
-## File Version: 0.01
+## File Version: 0.04
 
 SRM_PRINT_SUMMARY_LAYOUT2 <- function(object, digits)
 {
@@ -27,6 +27,12 @@ SRM_PRINT_SUMMARY_LAYOUT2 <- function(object, digits)
     cat("optimizer","=", res_opt$optimizer, "\n")
     cat("Optimization function","=", res_opt$opt_label, "\n")
     cat("Maximum absolute value of relative gradient", "=", object$grad_maxabs, "\n")
+
+    cat("\nINPUT DATA\n\n")
+    cat("Number of groups","=", object$ngroups, "\n")
+    cat("Number of Round-Robin groups","=", object$nrr, "\n")
+    cat("Number of persons","=", object$npersons, "\n")
+    cat("Number of dyads","=", object$ndyads, "\n")
 
     #* display parameter table
     cat("\nESTIMATED PARAMETERS\n\n")

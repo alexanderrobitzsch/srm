@@ -1,9 +1,8 @@
 ## File Name: SRM_PRINT_OPTINFOS.R
-## File Version: 0.07
+## File Version: 0.11
 
 SRM_PRINT_OPTINFOS <- function( object = NULL,
                                 digits = 3L )
-
 {
 
      #- get part of result_object that containts optimizer infos
@@ -24,7 +23,10 @@ SRM_PRINT_OPTINFOS <- function( object = NULL,
                 "Deviance: ",
                 "",
                 "Number of groups: ",
-                "Number of round-robin groups: ")
+                "Number of round-robin groups: ",
+                "Number of persons: ",
+                "Number of dyads: "
+                )
 
      values <- c(srm_optimizer_info$optimizer,
                  conv_info,
@@ -35,7 +37,8 @@ SRM_PRINT_OPTINFOS <- function( object = NULL,
                  -2*round( srm_optimizer_info$value, digits),
                  "",
                  length( unique( srm_yindex$group.var ) ),
-                 length( unique( srm_yindex$Group ) ))
+                 length( unique( srm_yindex$Group ) ),
+                 object$npersons, object$ndyads     )
 
      #- print texts
      char.format <- paste("%3s%-", 14, "s", sep = "")

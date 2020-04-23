@@ -1,5 +1,5 @@
 ## File Name: SRM_OPTIMIZE.R
-## File Version: 0.280
+## File Version: 0.288
 
 SRM_OPTIMIZE <- function(x, parm.table, parm_list, symm_matrices, npar,
     data_list, NOP, parm_table_free, use_rcpp=TRUE, shortcut=TRUE,
@@ -21,8 +21,9 @@ SRM_OPTIMIZE <- function(x, parm.table, parm_list, symm_matrices, npar,
         data_list_gg <- data_list[[gg]]
         calculate_gg <- (! shortcut ) | data_list_gg$calculate_gg
 
-        # compute covariance matrix at individual level
+        # compute covariance matrix at individual level        
         SIGMA_U <- SRM_COMPUTE_SEM_SIGMA( parm_list=parm_list, level="U", group=gg )
+
         # compute covariance matrix at dyad level
         SIGMA_D <- SRM_COMPUTE_SEM_SIGMA( parm_list=parm_list, level="D", group=gg )
 
@@ -129,7 +130,6 @@ SRM_OPTIMIZE <- function(x, parm.table, parm_list, symm_matrices, npar,
 
                     #-- non-zero gradient in SIGMA_Y_der
                     if (calculate_gg_rr & use_rcpp){
-                        # der_bool <- SRM_RCPP_SRM_COMPUTE_NONZERO_GRADIENT( sigma_y_der=SIGMA_Y_der, eps=1e-12)
                         der_bool <- SRM_RCPP_SRM_COMPUTE_NONZERO_GRADIENT_INDICES(
                                             sigma_y_der=SIGMA_Y_der, eps=1e-12)
                         der_bool_saved[[nn]] <- der_bool

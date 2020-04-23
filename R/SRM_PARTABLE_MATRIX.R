@@ -1,5 +1,5 @@
 ## File Name: SRM_PARTABLE_MATRIX.R
-## File Version: 0.11
+## File Version: 0.121
 
 ## functions to compute the matrix representation
 ## overall function that is called in SRM_AUFRUF
@@ -375,7 +375,7 @@ SRM_PARTABLE_TO_MATRIX_DYAD <- function(srmpartable = NULL,
             # just B_D
             idx <- which(target$group == g &
                          target$op == "~" )
-            tmp.mat[idx] <- "B_U"
+            tmp.mat[idx] <- "B_D"
             tmp.row[idx] <- match(target$lhs[idx],rr.latents)
             tmp.col[idx] <- match(target$rhs[idx],rr.latents)
             ncol_B_D <- rr.nfac

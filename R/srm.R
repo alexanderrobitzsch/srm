@@ -1,5 +1,5 @@
 ## File Name: srm.R
-## File Version: 0.6001
+## File Version: 0.614
 
 
 srm <- function(model.syntax = NULL,
@@ -169,13 +169,20 @@ z0 <- Sys.time()
     se <- sqrt(diag(vcov))
     parm.table$se <- se[ parm.table$index ]
 
+    #- informations about input data    
+    res <- SRM_INFO_INPUT_DATA(data_list=data_list)
+    nrr <- res$nrr
+    npersons <- res$npersons
+    ndyads <- res$ndyads
+    
     s2 <- Sys.time()
     time <- list(time_pre=time_pre, time_opt=time_opt, time_post=s2-s1)
 
     #--- output
     res <- list( coef=coef, vcov=vcov, grad=grad, se=se, loglike=loglike, dev=dev,
                     res_opt=res_opt, parm.table=parm.table, parm_list=parm_list,
-                    data_list=data_list, ngroups=ngroups, grad_maxabs=grad_maxabs,
+                    data_list=data_list, ngroups=ngroups, nrr=nrr, npersons=npersons,
+                    ndyads=ndyads, grad_maxabs=grad_maxabs,
                     CALL=CALL, time=time, time_start=v1 )
     class(res) <- 'srm'
     return(res)
