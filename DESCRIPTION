@@ -1,8 +1,8 @@
 Package: srm
 Type: Package
 Title: Structural Equation Modeling for the Social Relations Model
-Version: 0.4-13
-Date: 2020-04-23 10:27:24
+Version: 0.4-17
+Date: 2020-04-24 13:17:23
 Author: Steffen Nestler [aut], Alexander Robitzsch [aut, cre], 
         Oliver Luedtke [aut]
 Maintainer: Alexander Robitzsch <robitzsch@leibniz-ipn.de>

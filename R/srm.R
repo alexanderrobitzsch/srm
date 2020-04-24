@@ -1,5 +1,5 @@
 ## File Name: srm.R
-## File Version: 0.614
+## File Version: 0.618
 
 
 srm <- function(model.syntax = NULL,
@@ -175,6 +175,15 @@ z0 <- Sys.time()
     npersons <- res$npersons
     ndyads <- res$ndyads
     
+    # covariance matrices at levels
+    sigma <- list()
+    for (level in c("U","D")){
+        for (gg in 1:ngroups){
+            sigma[[level]][[gg]] <- SRM_COMPUTE_SEM_SIGMA( parm_list=parm_list, 
+                                            level=level, group=gg )    
+        }
+    }
+    
     s2 <- Sys.time()
     time <- list(time_pre=time_pre, time_opt=time_opt, time_post=s2-s1)
 
@@ -182,7 +191,7 @@ z0 <- Sys.time()
     res <- list( coef=coef, vcov=vcov, grad=grad, se=se, loglike=loglike, dev=dev,
                     res_opt=res_opt, parm.table=parm.table, parm_list=parm_list,
                     data_list=data_list, ngroups=ngroups, nrr=nrr, npersons=npersons,
-                    ndyads=ndyads, grad_maxabs=grad_maxabs,
+                    ndyads=ndyads, grad_maxabs=grad_maxabs, sigma=sigma,
                     CALL=CALL, time=time, time_start=v1 )
     class(res) <- 'srm'
     return(res)

@@ -1,5 +1,5 @@
 ## File Name: SRM_COMPUTE_SEM_SIGMA.R
-## File Version: 0.11
+## File Version: 0.12
 
 
 # compute sigma in a SEM model
@@ -12,13 +12,6 @@ SRM_COMPUTE_SEM_SIGMA <- function( parm_list, level, group=1 )
     PSI <- parm_list1[[ paste0("PSI_", level) ]]
     B <- parm_list1[[ paste0("B_", level) ]]
     #-- computations
-    if ( ! is.null(B) ){
-        IB <- diag(1, nrow(B) )
-        W <- SRM_GINV( IB - B )
-        LAM_W <- LAM %*% W
-    } else {
-        LAM_W <- LAM
-    }
-    SIGMA <- LAM_W %*% PHI %*% t(LAM_W) + PSI
+    SIGMA <- SRM_COMPUTE_SEM_SIGMA_COMPUTATION(B=B, LAM=LAM, PHI=PHI, PSI=PSI)    
     return(SIGMA)
 }

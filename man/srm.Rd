@@ -1,5 +1,5 @@
 %% File Name: srm.Rd
-%% File Version: 0.166
+%% File Version: 0.167
 
 \name{srm}
 \alias{srm}
@@ -107,6 +107,7 @@ List with following entries (selection)
 \item{coef}{Vector of parameter estimates}
 \item{vcov}{Covariance matrix of parameter estimates}
 \item{parm_list}{List of model matrices}
+\item{sigma}{Model implied covariance matrices}
 \item{\dots}{Further values}
 }
 

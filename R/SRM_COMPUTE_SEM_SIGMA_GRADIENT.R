@@ -1,5 +1,5 @@
 ## File Name: SRM_COMPUTE_SEM_SIGMA_GRADIENT.R
-## File Version: 0.168
+## File Version: 0.171
 
 
 SRM_COMPUTE_SEM_SIGMA_GRADIENT <- function( parm_list, parm_type, parm_pos,
@@ -23,7 +23,7 @@ SRM_COMPUTE_SEM_SIGMA_GRADIENT <- function( parm_list, parm_type, parm_pos,
     #--------------------------------------
     # differentiation with respect to LAM
     if (parm_type %in% paste0("LAM", levels_sub) ){
-        W <- SRM_GINV(IB - B)
+        W <- solve(IB - B)
         # H1 <- LAM %*% W %*% PHI
         H1 <- LAM %*% W %*% PHI %*% t(W)
         H2 <- t(H1)
@@ -38,7 +38,7 @@ SRM_COMPUTE_SEM_SIGMA_GRADIENT <- function( parm_list, parm_type, parm_pos,
     #--------------------------------------
     # differentiation with respect to PHI
     if (parm_type %in% paste0("PHI", levels_sub ) ){
-        W <- SRM_GINV(IB - B)
+        W <- solve(IB - B)
         H1 <- LAM %*% W
         x <- matrix(0, nrow=nrow(PHI), ncol=ncol(PHI) )
         x <- SRM_REPLACE_VALUES(x=x, val=1, pos=parm_pos, symm=TRUE)
@@ -53,10 +53,10 @@ SRM_COMPUTE_SEM_SIGMA_GRADIENT <- function( parm_list, parm_type, parm_pos,
     #--------------------------------------
     # differentiation with respect to B
     if (parm_type %in% paste0("B", levels_sub) ){
-        numdiff <- TRUE
+        numdiff <- FALSE
         #- do not use these derivatives anymore
         if (! numdiff){
-            W <- SRM_GINV(IB - B)
+            W <- solve(IB - B)
             Wt <- t(W)
             x0 <- matrix(0, nrow=nrow(B), ncol=ncol(B))
             x <- SRM_REPLACE_VALUES(x=x0, val=1, pos=parm_pos, symm=FALSE)
