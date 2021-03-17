@@ -1,5 +1,5 @@
 ## File Name: SRM_PARTABLE_MAKE.R
-## File Version: 0.256
+## File Version: 0.301
 
 
 SRM_PARTABLE_MAKE <- function(model.syntax = '',
@@ -8,7 +8,7 @@ SRM_PARTABLE_MAKE <- function(model.syntax = '',
 {
 
     # Prepare the model syntax for parsing
-    model <- SRM_PARSER_PREPARE(model.syntax)
+    model <- SRM_PARSER_PREPARE( model.syntax = model.syntax )
 
     # Split the model into person and dyad part
     models  <- SRM_PARSER_SPLIT(model)
@@ -28,10 +28,11 @@ SRM_PARTABLE_MAKE <- function(model.syntax = '',
     # fixed: 0   0   0
     # start: 0   0   0
 
-    pers.list <- SRM_PARSER_LIST(model.p, ngroups = ngroups, name="Person")
-    dyad.list <- SRM_PARSER_LIST(model.d, ngroups = ngroups, name="Dyad")
-    dyad.list <- SRM_PARSER_LIST_ADD_DYAD_FACTORS(dyad.list)
-
+    pers.list <- SRM_PARSER_LIST( model = model.p, ngroups = ngroups, name = "Person" )
+    dyad.list <- SRM_PARSER_LIST( model = model.d, ngroups = ngroups, name = "Dyad")
+    dyad.list <- SRM_PARSER_LIST_ADD_DYAD_FACTORS( parlist = dyad.list )
+    dyad.list <- SRM_PARSER_LIST_ADD_DYAD_EXOCOV( parlist = dyad.list )
+    
     # We use pers.list to construct a pers.list that
     # contains the user-specified parameters, the default-parameters and
     # the starting values

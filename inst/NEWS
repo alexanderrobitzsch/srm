@@ -20,13 +20,14 @@ CHANGELOG srm
 
 
 --------------------------------------------------------------------------
-VERSIONS srm 0.4  |  2020-04-24  |  Last: srm 0.4-17
+VERSIONS srm 0.4  |  2021-03-17  |  Last: srm 0.4-19
 --------------------------------------------------------------------------
  
 NOTE  * changed several defaults for models with constraints
 FIXED * fixed a bug for models in which a regression is involved
 FIXED * fixed incorrect summary output: some covariance estimates
         were incorrectly removed (thanks to @TDJorgensen, Github issue #1)
+FIXED * bug fixes in parsing files for model syntax
 
 
 DATA  * ---

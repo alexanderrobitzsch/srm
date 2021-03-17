@@ -1,5 +1,6 @@
 ## File Name: SRM_PARTABLE_MATRIX.R
-## File Version: 0.121
+## File Version: 0.131
+
 
 ## functions to compute the matrix representation
 ## overall function that is called in SRM_AUFRUF

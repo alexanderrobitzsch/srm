@@ -1,8 +1,8 @@
 ## File Name: SRM_PARSER_FUNKTIONEN.R
-## File Version: 0.161
+## File Version: 0.171
 
 
-SRM_PARSER_PREPARE <- function(model.syntax='') {
+SRM_PARSER_PREPARE <- function( model.syntax = '' ) {
 
     # check for empty syntax
     if(length(model.syntax) == 0) {
@@ -30,7 +30,7 @@ SRM_PARSER_PREPARE <- function(model.syntax='') {
 
 }
 
-SRM_PARSER_SPLIT <- function(model.syntax='') {
+SRM_PARSER_SPLIT <- function( model.syntax ='' ) {
 
     # positionen of person code and dyad code start
     person.idx <- grep("%Person|%person",model.syntax)
@@ -283,67 +283,63 @@ SRM_GET_MODIFIER <- function(modifier) {
 
 }
 
-SRM_PARSER_SORT_PTYPE <- function(PARLIST, name="EMPTY") {
-
-
+# new version: 26.02.2021
+SRM_PARSER_SORT_PTYPE <- function(PARLIST, name="EMPTY") 
+{
    if (name=="Person") {
-
       tmp.idx <- which(PARLIST$op == "~~" &
                        PARLIST$ptype1 == "P" &
                        PARLIST$ptype2 == "A")
       for (i in 1:length(tmp.idx)) {
+          old.lhs <- PARLIST$lhs[tmp.idx]
+          old.rhs <- PARLIST$rhs[tmp.idx]
+          PARLIST$lhs[tmp.idx] <- old.rhs
+          PARLIST$rhs[tmp.idx] <- old.lhs
           PARLIST$ptype1[tmp.idx] <- "A"
           PARLIST$ptype2[tmp.idx] <- "P"
       }
-
    } else if (name=="Dyad") {
-
       tmp.idx <- which(PARLIST$op == "~~" &
                        PARLIST$ptype1 == "PA" &
                        PARLIST$ptype2 == "AP")
       for (i in 1:length(tmp.idx)) {
+          old.lhs <- PARLIST$lhs[tmp.idx]
+          old.rhs <- PARLIST$rhs[tmp.idx]
+          PARLIST$lhs[tmp.idx] <- old.rhs
+          PARLIST$rhs[tmp.idx] <- old.lhs
           PARLIST$ptype1[tmp.idx] <- "AP"
           PARLIST$ptype2[tmp.idx] <- "PA"
       }
-
    }
-
    return(PARLIST)
-
 }
 
-SRM_PARSER_ADD_PTYPE_EQS <- function(PARLIST) {
-
-
+SRM_PARSER_ADD_PTYPE_EQS <- function( parlist = NULL ) 
+{
    lhs <- character(0)
    rhs <- character(0)
-   lhs <- paste(PARLIST$lhs,"@",PARLIST$ptype1,sep="")
-   rhs <- paste(PARLIST$rhs,"@",PARLIST$ptype2,sep="")
-   PARLIST$lhs <- lhs
-   PARLIST$rhs <- rhs
-   PARLIST$ptype1=NULL
-   PARLIST$ptype2=NULL
-
-   return(PARLIST)
-
+   lhs <- paste(parlist$lhs,"@",parlist$ptype1,sep="")
+   rhs <- paste(parlist$rhs,"@",parlist$ptype2,sep="")
+   parlist$lhs <- lhs
+   parlist$rhs <- rhs
+   parlist$ptype1=NULL
+   parlist$ptype2=NULL
+   return(parlist)
 }
 
-SRM_PARSER_LIST_ADD_DYAD_FACTORS <- function( parlist ) {
-
+SRM_PARSER_LIST_ADD_DYAD_FACTORS <- function( parlist = NULL ) 
+{
     # ergaenzt in dyad-Liste AP-Faktoren bzw. PA-Faktoren
     # Achtung: single-indicator Faktoren werden nicht ergaenzt
     # das mache ich spaeter beim erstellen der default-parliste
-
     idx.lv.ap <- which(parlist$op == "=~" & grepl("@AP",parlist$lhs))
     idx.lv.pa <- which(parlist$op == "=~" & grepl("@PA",parlist$lhs))
     lv.ap <- sort(unique(parlist$lhs[idx.lv.ap]))
     lv.pa <- sort(unique(parlist$lhs[idx.lv.pa]))
     vec.lv.ap <- gsub("@AP","",lv.ap)
     vec.lv.pa <- gsub("@PA","",lv.pa)
-
     # durchlaufe lv.aps und pruefe, ob sie in pa sind, wenn nicht, dann ergaenze
     # das entsprechende Faktormodell
-
     add.type <- character(0)
     add.lhs  <- character(0)
     add.op   <- character(0)
@@ -351,13 +347,9 @@ SRM_PARSER_LIST_ADD_DYAD_FACTORS <- function( parlist ) {
     add.group <- integer(0)
     add.equal <- character(0)
     add.starts <- integer(0)
-
     if (length(lv.ap) > 0L) {
-
        for (i in 1:length(lv.ap)) {
-
            if( !(vec.lv.ap[i] %in% vec.lv.pa)) {
-
               idx.ind <- which(parlist$op == "=~" & parlist$lhs == lv.ap[i])
               add.ind <- gsub("@AP","@PA",parlist$rhs[idx.ind])
               add.equ <- parlist$equal[idx.ind]
@@ -371,25 +363,18 @@ SRM_PARSER_LIST_ADD_DYAD_FACTORS <- function( parlist ) {
               add.equal <- c(add.equal,add.equ)
               add.starts <- c(add.starts,add.sta)
               add.group <- c(add.group,add.gro)
-
            }
-
        }
-
     }
-
     if (length(lv.pa) > 0L) {
-
        for (i in 1:length(lv.pa)) {
-
            if( !(vec.lv.pa[i] %in% vec.lv.ap)) {
-
               idx.ind <- which(parlist$op == "=~" & parlist$lhs == lv.pa[i])
               add.ind <- gsub("@PA","@AP",parlist$rhs[idx.ind])
               add.equ <- parlist$equal[idx.ind]
               add.sta <- parlist$starts[idx.ind]
               add.gro <- parlist$group[idx.ind]
-
+              
               add.type <- c(add.type,rep("Dyad",length(add.ind)))
               add.lhs <- c(add.lhs,gsub("@PA","@AP",parlist$lhs[idx.ind]))
               add.op  <- c(add.op,rep("=~",length(add.ind)))
@@ -397,13 +382,9 @@ SRM_PARSER_LIST_ADD_DYAD_FACTORS <- function( parlist ) {
               add.equal <- c(add.equal,add.equ)
               add.starts <- c(add.starts,add.sta)
               add.group <- c(add.group,add.gro)
-
            }
-
        }
-
     }
-
     parlist$type <- c(parlist$type,add.type)
     parlist$lhs <- c(parlist$lhs,add.lhs)
     parlist$op <- c(parlist$op,add.op)
@@ -414,26 +395,60 @@ SRM_PARSER_LIST_ADD_DYAD_FACTORS <- function( parlist ) {
     parlist$equal <- c(parlist$equal,add.equal)
     parlist$mod.idx <- c(parlist$mod.idx,rep(0,length(add.lhs)))
     parlist$free <- c(parlist$free,rep(1,length(add.lhs)))
-
     return(parlist)
-
 }
 
-SRM_PARSER_LIST_PERSON_CHANGE_INTERCEPT <- function( parlist ) {
+SRM_PARSER_LIST_ADD_DYAD_EXOCOV <- function( parlist = NULL ) 
+{
+  #- get indices:
+  idx.reg <- which( parlist$op == "~" )
+  #- iterate:
+  if ( length(idx.reg) > 0L ) {
+    for ( ii in 1:length( idx.reg ) ) {
+      #- get index:
+      idx <- idx.reg[ii]
+      #- let's go: within the second if-else we check whether the
+      #  covariate is already within the list 
+      if ( grepl("@AP", parlist$lhs[ idx ] ) ) {
+        tmp.lhs <- gsub("@AP","@PA",parlist$lhs[ idx ])
+        if ( any( parlist$op == "~" & parlist$lhs == tmp.lhs & parlist$rhs == parlist$rhs[ idx ] ) ) 
+          break
+      } else if ( grepl("@PA", parlist$lhs[ idx ] ) ) {
+        tmp.lhs <- gsub("@PA","@AP",parlist$lhs[ idx ])
+        if ( any( parlist$op == "~" & parlist$lhs == tmp.lhs & parlist$rhs == parlist$rhs[ idx ] ) )
+          break
+      }
+      #- else:
+      parlist$type <- c( parlist$type, parlist$type[idx])
+      parlist$lhs <- c( parlist$lhs,tmp.lhs)
+      parlist$op <- c( parlist$op,parlist$op[idx])
+      parlist$rhs <- c( parlist$rhs,parlist$rhs[idx])
+      parlist$group <- c( parlist$group,parlist$group[idx])
+      parlist$fixed <- c( parlist$fixed,parlist$fixed[idx])
+      parlist$starts <- c( parlist$starts,parlist$starts[idx])
+      parlist$mod.idx <- c( parlist$mod.idx,parlist$mod.idx[idx])
+      parlist$free <- c( parlist$free,parlist$free[idx])
+      #- set the parms to the same value:
+      parlist$equal[idx] <- paste( "rr", ii, sep = "")
+      parlist$equal <- c( parlist$equal,parlist$equal[idx])      
+    }
+  }
+  return( parlist )
+}
 
+SRM_PARSER_LIST_PERSON_CHANGE_INTERCEPT <- function( parlist  = NULL ) 
+{
     # if a user has defined the mean of an obsverved variable with
     # @P we change this to @A
     # IMPORTANT: this change does not apply to the means of the latent
     #            factors
-
     tmp.idx <- which(  parlist$op == "~1" &
                        parlist$ptype1 == "P" &
                      !(parlist$op == "=~") )
-
-    for (i in 1:length(tmp.idx)) {
-         parlist$ptype1[tmp.idx] <- "A"
-         parlist$ptype2[tmp.idx] <- "A"
+    for (ii in 1:length(tmp.idx)) {
+      idx <- tmp.idx[ii]
+      parlist$ptype1[idx] <- "A"
+      parlist$ptype2[idx] <- "A"
     }
-
     return(parlist)
 }
