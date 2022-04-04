@@ -1,5 +1,5 @@
 ## File Name: SRM_PARSER_LIST.R
-## File Version: 0.21
+## File Version: 0.22
 
 
 
@@ -106,7 +106,7 @@ SRM_PARSER_LIST <- function( model, ngroups = 1L, name = NULL ) {
 
     } # for-loop lines
 
-    
+
     SRM.PARSE <- list(type=SRM.type,lhs=SRM.lhs, op=SRM.op, rhs=SRM.rhs,
                       group=SRM.group, ptype1=SRM.ptype1, ptype2=SRM.ptype2,
                       fixed=SRM.fixed, starts=SRM.starts, equal=SRM.equal,

@@ -1,5 +1,5 @@
 ## File Name: SRM_PRINT_SUMMARY_LAYOUT2.R
-## File Version: 0.08
+## File Version: 0.09
 
 SRM_PRINT_SUMMARY_LAYOUT2 <- function(object, digits)
 {
@@ -44,17 +44,17 @@ SRM_PRINT_SUMMARY_LAYOUT2 <- function(object, digits)
     round_vars <- c("est","se")
     obji[,round_vars] <- round( obji[,round_vars], digits)
     print(obji)
-    
+
     #*** model implied covariance matrices
-    cat("\nMODEL IMPLIED COVARIANCE MATRICES\n")    
+    cat("\nMODEL IMPLIED COVARIANCE MATRICES\n")
     for (gg in 1:object$ngroups){
         cat(paste0("\nGroup ", gg, ", Person Level\n\n"))
         obji <- object$sigma[["U"]][[gg]]
         print(round(obji, digits))
         cat(paste0("\nGroup ", gg, ", Dyad Level\n\n"))
         obji <- object$sigma[["D"]][[gg]]
-        print(round(obji, digits))        
+        print(round(obji, digits))
     }
-    
-    
+
+
 }

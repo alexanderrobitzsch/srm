@@ -1,5 +1,5 @@
 ## File Name: SRM_OPTIMIZE.R
-## File Version: 0.288
+## File Version: 0.293
 
 SRM_OPTIMIZE <- function(x, parm.table, parm_list, symm_matrices, npar,
     data_list, NOP, parm_table_free, use_rcpp=TRUE, shortcut=TRUE,
@@ -21,7 +21,7 @@ SRM_OPTIMIZE <- function(x, parm.table, parm_list, symm_matrices, npar,
         data_list_gg <- data_list[[gg]]
         calculate_gg <- (! shortcut ) | data_list_gg$calculate_gg
 
-        # compute covariance matrix at individual level        
+        # compute covariance matrix at individual level
         SIGMA_U <- SRM_COMPUTE_SEM_SIGMA( parm_list=parm_list, level="U", group=gg )
 
         # compute covariance matrix at dyad level

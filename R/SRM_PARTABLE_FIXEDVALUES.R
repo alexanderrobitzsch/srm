@@ -1,5 +1,5 @@
 ## File Name: SRM_PARTABLE_FIXEDVALUES.R
-## File Version: 0.17
+## File Version: 0.18
 
 SRM_PARTABLE_FIXEDVALUES <- function(LIST, name="EMPTY", ngroups = 1L)
 {
@@ -53,7 +53,7 @@ SRM_PARTABLE_FIXEDVALUES <- function(LIST, name="EMPTY", ngroups = 1L)
         if (sum(ind)>0){
             equal[ind] <- LIST$equal[ind]
         }
-      
+
     } # else - Dyad
     LIST$equal <- equal
     return(LIST)

@@ -1,5 +1,5 @@
 ## File Name: srm.R
-## File Version: 0.618
+## File Version: 0.625
 
 
 srm <- function(model.syntax = NULL,
@@ -57,6 +57,7 @@ z0 <- Sys.time()
     parm_list <- SRM_INCLUDE_PARAMETERS_PARM_LIST( parm.table=parm.table,
                 parm_list=parm_list, symm_matrices=symm_matrices, include_fixed=TRUE )
 # cat(" *** create parameter lists") ; z1 <- Sys.time(); print(z1-z0) ; z0 <- z1
+
 
     ## Step 2: make list with data
     data_list <- SRM_MAKE_DATA_LIST(srm_data = data, person_names = person_names ,
@@ -169,21 +170,21 @@ z0 <- Sys.time()
     se <- sqrt(diag(vcov))
     parm.table$se <- se[ parm.table$index ]
 
-    #- informations about input data    
+    #- informations about input data
     res <- SRM_INFO_INPUT_DATA(data_list=data_list)
     nrr <- res$nrr
     npersons <- res$npersons
     ndyads <- res$ndyads
-    
+
     # covariance matrices at levels
     sigma <- list()
     for (level in c("U","D")){
         for (gg in 1:ngroups){
-            sigma[[level]][[gg]] <- SRM_COMPUTE_SEM_SIGMA( parm_list=parm_list, 
-                                            level=level, group=gg )    
+            sigma[[level]][[gg]] <- SRM_COMPUTE_SEM_SIGMA( parm_list=parm_list,
+                                            level=level, group=gg )
         }
     }
-    
+
     s2 <- Sys.time()
     time <- list(time_pre=time_pre, time_opt=time_opt, time_post=s2-s1)
 

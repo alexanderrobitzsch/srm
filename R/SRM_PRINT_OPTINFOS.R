@@ -1,5 +1,5 @@
 ## File Name: SRM_PRINT_OPTINFOS.R
-## File Version: 0.11
+## File Version: 0.12
 
 SRM_PRINT_OPTINFOS <- function( object = NULL,
                                 digits = 3L )
@@ -8,7 +8,7 @@ SRM_PRINT_OPTINFOS <- function( object = NULL,
      #- get part of result_object that containts optimizer infos
      srm_optimizer_info <- object$res_opt
      srm_yindex <- object$data_list[[1]]$y_index
-     
+
      #- convergence info:
      conv_info <- "converged."
      if ( !srm_optimizer_info$converged ) { conv_info <- "NOT converged." }
@@ -47,7 +47,7 @@ SRM_PRINT_OPTINFOS <- function( object = NULL,
      for ( i in 1:length( texts ) ) {
          tmp <- paste( sprintf( char.format, "", texts[i] ),
                        values[i],
-                       sep = "" )                       
+                       sep = "" )
          #message(tmp)
          cat(tmp)
          cat("\n")

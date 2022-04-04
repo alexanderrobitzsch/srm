@@ -1,5 +1,5 @@
 ## File Name: SRM_MAKE_DATA_LIST.R
-## File Version: 0.264
+## File Version: 0.272
 
 
 SRM_MAKE_DATA_LIST <- function( srm_data = NULL,
@@ -14,7 +14,6 @@ SRM_MAKE_DATA_LIST <- function( srm_data = NULL,
                                 do_checks=FALSE )
 {
     #use_rcpp <- FALSE
-
     ##-- some checks
     if (do_checks){
 
@@ -42,11 +41,14 @@ SRM_MAKE_DATA_LIST <- function( srm_data = NULL,
 
 
     ##-- add a dyad number that is rrgroup specific
-    #z0 <- Sys.time()
+z0 <- Sys.time()
+
     srm_data <- SRM_PREPARE_ADD_DYADNUMBER( data = srm_data,
                                             person_names = person_names,
                                             rrgroup_name = rrgroup_name )
-    # cat(" --- SRM_PREPARE_ADD_DYADNUMBER") ; z1 <- Sys.time(); print(z1-z0) ; z0 <- z1
+# cat(" --- SRM_PREPARE_ADD_DYADNUMBER") ; z1 <- Sys.time(); print(z1-z0) ; z0 <- z1
+
+
 
     ##-- make a long data frame, sort the data
     srm_data <- SRM_PREPARE_DATA( data = srm_data,
@@ -60,15 +62,14 @@ SRM_MAKE_DATA_LIST <- function( srm_data = NULL,
     pedata <- srm_data[["pedata"]]
     dydata <- srm_data[["dydata"]]
 
-    # cat(" --- SRM_PREPARE_DATA") ; z1 <- Sys.time(); print(z1-z0) ; z0 <- z1
-
+# cat(" --- SRM_PREPARE_DATA") ; z1 <- Sys.time(); print(z1-z0) ; z0 <- z1
     #groups <- unique(srm_data[,group.var])
     groups <- unique(rrdata[,group.var])
     ngroups <- length(groups)
     data_list <- vector("list",ngroups)
     allnames <- c(group.var, rrgroup_name, person_names, "DyadNo_SRM", "no_vars", "y" )
+# cat(" --- start group iteration") ; z1 <- Sys.time(); print(z1-z0) ; z0 <- z1
 
-    # cat(" --- start group iteration") ; z1 <- Sys.time(); print(z1-z0) ; z0 <- z1
     ##-- we iterate through the groups
     for (ng in 1:ngroups) {
 
@@ -98,7 +99,6 @@ SRM_MAKE_DATA_LIST <- function( srm_data = NULL,
             m2 <- matrix(c1, nrow=n1, ncol=n2, byrow=TRUE)
             Xs <- 1*(m1 == m2)
          }
-
          #- make the y-index matrix
          y_index <- tmp_data[,allnames]
 
@@ -107,21 +107,20 @@ SRM_MAKE_DATA_LIST <- function( srm_data = NULL,
              Xu <- as.matrix( pedata[pedata[,group.var] == groups[ng],] )
          } else { Xu <- NULL }
 
-         #- make the personcov - variable matrices
+         #- make the dyadcov - variable matrices
          if( !(is.null(dydata)) ) {
              Xd <- as.matrix( dydata[dydata[,group.var] == groups[ng],] )
          } else { Xd <- NULL }
 
          #- make the matrix lists
+
          pers_matrix_list <- SRM_MAKE_DATA_MATRIX_PERSON( data = tmp_data,
                                                           person_names = person_names,
                                                           rrgroup_name = rrgroup_name,
                                                           use_rcpp = use_rcpp )
-
          dyad_matrix_list <- SRM_MAKE_DATA_MATRIX_DYAD( data = tmp_data,
                                                         rrgroup_name = rrgroup_name,
                                                         use_rcpp = use_rcpp)
-
          #- add the lists to the overall list
          tmp_data_list <- list( y = tmp_data[,c(rrgroup_name,"y")] ,
                                 Xs = Xs,
@@ -132,7 +131,6 @@ SRM_MAKE_DATA_LIST <- function( srm_data = NULL,
                                 y_index = y_index,
                                 Xu = Xu,
                                 Xd = Xd )
-
          #- add to the overall list
          data_list[[ng]] <- tmp_data_list
      }

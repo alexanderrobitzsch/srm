@@ -1,5 +1,5 @@
 ## File Name: SRM_PARSER_FUNKTIONEN.R
-## File Version: 0.171
+## File Version: 0.172
 
 
 SRM_PARSER_PREPARE <- function( model.syntax = '' ) {
@@ -284,7 +284,7 @@ SRM_GET_MODIFIER <- function(modifier) {
 }
 
 # new version: 26.02.2021
-SRM_PARSER_SORT_PTYPE <- function(PARLIST, name="EMPTY") 
+SRM_PARSER_SORT_PTYPE <- function(PARLIST, name="EMPTY")
 {
    if (name=="Person") {
       tmp.idx <- which(PARLIST$op == "~~" &
@@ -314,7 +314,7 @@ SRM_PARSER_SORT_PTYPE <- function(PARLIST, name="EMPTY")
    return(PARLIST)
 }
 
-SRM_PARSER_ADD_PTYPE_EQS <- function( parlist = NULL ) 
+SRM_PARSER_ADD_PTYPE_EQS <- function( parlist = NULL )
 {
    lhs <- character(0)
    rhs <- character(0)
@@ -327,7 +327,7 @@ SRM_PARSER_ADD_PTYPE_EQS <- function( parlist = NULL )
    return(parlist)
 }
 
-SRM_PARSER_LIST_ADD_DYAD_FACTORS <- function( parlist = NULL ) 
+SRM_PARSER_LIST_ADD_DYAD_FACTORS <- function( parlist = NULL )
 {
     # ergaenzt in dyad-Liste AP-Faktoren bzw. PA-Faktoren
     # Achtung: single-indicator Faktoren werden nicht ergaenzt
@@ -374,7 +374,7 @@ SRM_PARSER_LIST_ADD_DYAD_FACTORS <- function( parlist = NULL )
               add.equ <- parlist$equal[idx.ind]
               add.sta <- parlist$starts[idx.ind]
               add.gro <- parlist$group[idx.ind]
-              
+
               add.type <- c(add.type,rep("Dyad",length(add.ind)))
               add.lhs <- c(add.lhs,gsub("@PA","@AP",parlist$lhs[idx.ind]))
               add.op  <- c(add.op,rep("=~",length(add.ind)))
@@ -398,7 +398,7 @@ SRM_PARSER_LIST_ADD_DYAD_FACTORS <- function( parlist = NULL )
     return(parlist)
 }
 
-SRM_PARSER_LIST_ADD_DYAD_EXOCOV <- function( parlist = NULL ) 
+SRM_PARSER_LIST_ADD_DYAD_EXOCOV <- function( parlist = NULL )
 {
   #- get indices:
   idx.reg <- which( parlist$op == "~" )
@@ -408,10 +408,10 @@ SRM_PARSER_LIST_ADD_DYAD_EXOCOV <- function( parlist = NULL )
       #- get index:
       idx <- idx.reg[ii]
       #- let's go: within the second if-else we check whether the
-      #  covariate is already within the list 
+      #  covariate is already within the list
       if ( grepl("@AP", parlist$lhs[ idx ] ) ) {
         tmp.lhs <- gsub("@AP","@PA",parlist$lhs[ idx ])
-        if ( any( parlist$op == "~" & parlist$lhs == tmp.lhs & parlist$rhs == parlist$rhs[ idx ] ) ) 
+        if ( any( parlist$op == "~" & parlist$lhs == tmp.lhs & parlist$rhs == parlist$rhs[ idx ] ) )
           break
       } else if ( grepl("@PA", parlist$lhs[ idx ] ) ) {
         tmp.lhs <- gsub("@PA","@AP",parlist$lhs[ idx ])
@@ -430,13 +430,13 @@ SRM_PARSER_LIST_ADD_DYAD_EXOCOV <- function( parlist = NULL )
       parlist$free <- c( parlist$free,parlist$free[idx])
       #- set the parms to the same value:
       parlist$equal[idx] <- paste( "rr", ii, sep = "")
-      parlist$equal <- c( parlist$equal,parlist$equal[idx])      
+      parlist$equal <- c( parlist$equal,parlist$equal[idx])
     }
   }
   return( parlist )
 }
 
-SRM_PARSER_LIST_PERSON_CHANGE_INTERCEPT <- function( parlist  = NULL ) 
+SRM_PARSER_LIST_PERSON_CHANGE_INTERCEPT <- function( parlist  = NULL )
 {
     # if a user has defined the mean of an obsverved variable with
     # @P we change this to @A

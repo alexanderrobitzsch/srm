@@ -1,5 +1,5 @@
 //// File Name: SRM_RCPP_SRM_ARBSRM.cpp
-//// File Version: 0.434
+//// File Version: 0.436
 
 
 // [[Rcpp::depends(RcppArmadillo)]]
@@ -80,14 +80,14 @@ double SRM_ARBSRM_TRACE_PRODUCT_MATRIX_TRANSPOSE(Rcpp::NumericMatrix x, Rcpp::Nu
     int nc = x.ncol();
     for (int ii=0; ii<nr; ii++){
         for (int hh=0; hh<nc; hh++){
-            if ( ( x(ii,hh)!=0 ) | (y(ii,hh)!= 0 ) ){
+            if ( ( x(ii,hh)!=0 ) || (y(ii,hh)!= 0 ) ){
                 z += x(ii,hh)*y(ii,hh);
             }
         }
     }
     for (int ii=0; ii<nr; ii++){
         for (int hh=0; hh<nc; hh++){
-            if ( ( x(hh,ii)!=0 ) | (y(hh,ii)!= 0 ) ){
+            if ( ( x(hh,ii)!=0 ) || (y(hh,ii)!= 0 ) ){
                 z += x(hh,ii)*y(hh,ii);
             }
         }
@@ -186,8 +186,8 @@ Rcpp::List SRM_RCPP_SRM_ARBSRM_ONE_GROUP_ESTIMATE( Rcpp::NumericMatrix data,
         aa(i,i) = 1 + pact1;
         aa(i,(ntot+i)) = 1 + apar0;
         for (int j=0; j<ntot; j++){
-            if ((inde(i,0)!=inde(j,0)) | (inde(i,1)!=inde(j,1))) {
-                if ((inde(i,0)==inde(j,1)) & (inde(i,1)==inde(j,0))){
+            if ((inde(i,0)!=inde(j,0)) || (inde(i,1)!=inde(j,1))) {
+                if ((inde(i,0)==inde(j,1)) && (inde(i,1)==inde(j,0))){
                     recip(inde(i,0),inde(i,1)) = 1;
                     aa(i,(ntot5+i)) = 1;
                     aa(i,(ntot5+j)) = -1;
@@ -227,15 +227,15 @@ Rcpp::List SRM_RCPP_SRM_ARBSRM_ONE_GROUP_ESTIMATE( Rcpp::NumericMatrix data,
         mirr_i0a = -1/mirr(inde(i,0));
         mirr_i0b = (mirr(inde(i,0))-1)/mirr(inde(i,0));
         for (int j=0; j<ntot; j++){
-            if ((recip(inde(i,0),inde(i,1))!=0) & (recip(inde(j,0),inde(j,1))!=0)){
-                if ((inde(i,0)==inde(j,1)) & (inde(i,1)==inde(j,0))){
+            if ((recip(inde(i,0),inde(i,1))!=0) && (recip(inde(j,0),inde(j,1))!=0)){
+                if ((inde(i,0)==inde(j,1)) && (inde(i,1)==inde(j,0))){
                     aa(i,(ntot3+j)) = mirr_i0b;
                     aa(i,(ntot2+j)) = mirr_j1[j];
                 }
-                if ((inde(i,0)!=inde(j,1)) & (inde(i,1)==inde(j,0))){
+                if ((inde(i,0)!=inde(j,1)) && (inde(i,1)==inde(j,0))){
                     aa(i,(ntot2+j)) = mirr_j2[j];
                 }
-                if ((inde(i,0)==inde(j,1)) & (inde(i,1)!=inde(j,0))){
+                if ((inde(i,0)==inde(j,1)) && (inde(i,1)!=inde(j,0))){
                     aa(i,(ntot3+j)) = mirr_i0a;
                 }
             }
@@ -264,10 +264,10 @@ Rcpp::List SRM_RCPP_SRM_ARBSRM_ONE_GROUP_ESTIMATE( Rcpp::NumericMatrix data,
                 aa1(_,cc) = aa(_,cc+ttt);
                 vv1(_,cc) = vv(_,cc+uuu);
             }
-            if ((i<2) | (i>3)){
+            if ((i<2) || (i>3)){
                 c(i,j) = SRM_ARBSRM_TRACE_PRODUCT_MATRIX(aa1,vv1);
             }
-            if ((i==2) | (i==3)){
+            if ((i==2) || (i==3)){
                 c(i,j) = SRM_ARBSRM_TRACE_PRODUCT_MATRIX_TRANSPOSE(aa1, vv1);
             }
         }

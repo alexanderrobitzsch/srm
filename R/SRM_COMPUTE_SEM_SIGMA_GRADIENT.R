@@ -1,5 +1,5 @@
 ## File Name: SRM_COMPUTE_SEM_SIGMA_GRADIENT.R
-## File Version: 0.171
+## File Version: 0.172
 
 
 SRM_COMPUTE_SEM_SIGMA_GRADIENT <- function( parm_list, parm_type, parm_pos,
@@ -11,13 +11,13 @@ SRM_COMPUTE_SEM_SIGMA_GRADIENT <- function( parm_list, parm_type, parm_pos,
     PHI <- parm_list1[[ paste0("PHI_", parm_level) ]]
     PSI <- parm_list1[[ paste0("PSI_", parm_level) ]]
     B <- parm_list1[[ paste0("B_", parm_level) ]]
-    
+
     #-- start computations
     res <- diag(0, ncol(PSI) )
-    if ( is.null(B) ){    
+    if ( is.null(B) ){
         n1 <- ncol(PHI)
         B <- diag(0, n1)
-    }    
+    }
     IB <- diag(1, nrow(B) )
     levels_sub <- paste0("_", c("U","D") )
     #--------------------------------------
@@ -42,7 +42,7 @@ SRM_COMPUTE_SEM_SIGMA_GRADIENT <- function( parm_list, parm_type, parm_pos,
         H1 <- LAM %*% W
         x <- matrix(0, nrow=nrow(PHI), ncol=ncol(PHI) )
         x <- SRM_REPLACE_VALUES(x=x, val=1, pos=parm_pos, symm=TRUE)
-        res <- H1 %*% tcrossprod( x=x, y=H1)    
+        res <- H1 %*% tcrossprod( x=x, y=H1)
     }
     #--------------------------------------
     # differentiation with respect to PSI
@@ -71,10 +71,10 @@ SRM_COMPUTE_SEM_SIGMA_GRADIENT <- function( parm_list, parm_type, parm_pos,
         } else {
             # numerical derivatives
             h <- 1e-4
-            B1 <- B        
-            B1[ parm_pos[1], parm_pos[2] ] <- B1[ parm_pos[1], parm_pos[2] ] - h        
+            B1 <- B
+            B1[ parm_pos[1], parm_pos[2] ] <- B1[ parm_pos[1], parm_pos[2] ] - h
             cov1 <- SRM_COVFUN(LAM=LAM, B=B1, PHI=PHI, PSI=PSI, IB=IB)
-            B1 <- B        
+            B1 <- B
             B1[ parm_pos[1], parm_pos[2] ] <- B1[ parm_pos[1], parm_pos[2] ] + h
             cov2 <- SRM_COVFUN(LAM=LAM, B=B1, PHI=PHI, PSI=PSI, IB=IB)
             res <- (cov2-cov1)/(2*h)

@@ -1,5 +1,5 @@
 ## File Name: SRM_PREPARE_DATA.R
-## File Version: 0.302
+## File Version: 0.303
 
 
 ## all functions assume that data is sorted in a specific way
@@ -32,12 +32,12 @@ SRM_PREPARE_DATA <- function( data = NULL,
 
     #-- exclude missings
     rrdata <- rrdata[ !is.na( rrdata$y ) , ]
-    
+
     #-- add number of data points per rr-group
-    rrdata$rrcount <- ave( rrdata$y, 
-                           rrdata[,c(group.var,rrgroup_name)], 
+    rrdata$rrcount <- ave( rrdata$y,
+                           rrdata[,c(group.var,rrgroup_name)],
                            FUN = length )
-                           
+
     #-- sort the data frame
     rrdata <- rrdata[order(  rrdata[,group.var],
                             -rrdata$rrcount,
